@@ -7,11 +7,60 @@
  *
  * @package iro
  */
-
-
+ini_set('display_errors',0);
 define('IRO_VERSION', wp_get_theme()->get('Version'));
 define('INT_VERSION', '18.0.0');
 define('BUILD_VERSION', '2');
+
+add_filter('big_image_size_threshold', '__return_false', 1);
+add_filter( 'wp_editor_set_quality', function( $quality, $mime_type ) {
+    if ( $mime_type === 'image/webp' ) {
+        return 84;
+    }
+    return $quality;
+}, 10, 2 );
+//add_filter( 'jpeg_quality', '96', 1);
+// Remove certain image sizes or...
+function remove_some_image_sizes() {
+    foreach ( get_intermediate_image_sizes() as $size ) {
+        if ( in_array( $size, array( '1536x1536','2048x2048' ) ) ) {
+            // Will remove '1536x1536','2048x2048'
+            remove_image_size( $size );
+        }
+    }
+}
+add_action('init', 'remove_some_image_sizes');
+// Remove all but not default
+function remove_extra_image_sizes() {
+    foreach ( get_intermediate_image_sizes() as $size ) {
+        if ( !in_array( $size, array( 'thumbnail', 'medium', 'large' ) ) ) {
+             remove_image_size( $size );
+        }
+    }
+}
+//add_medium_large_size
+add_action('init', 'remove_extra_image_sizes',1);
+function add_medium_large_size( $sizes ) {
+    $sizes['medium_large'] = __( 'Medium Large' );
+    return $sizes;
+}
+add_filter( 'image_size_names_choose', 'add_medium_large_size' );
+
+function rename_filename($filename) {
+$info = pathinfo($filename);
+$ext = empty($info['extension']) ? '' : '.' . $info['extension'];
+$name = basename($filename, $ext);
+return substr(md5($name), 0, 20) . $ext;
+}
+add_filter('sanitize_file_name', 'rename_filename');
+// Remove Font @ Admin
+function remove_custom_admin_open_sans_font() {
+    remove_action('admin_head', 'custom_admin_open_sans_font');
+    remove_action('wp_head', 'custom_admin_open_sans_font_frontend_toolbar');
+    remove_action('login_head', 'custom_admin_open_sans_font_login_page');
+	remove_action('admin_notices', 'scheme_tip');
+}
+add_action('admin_init', 'remove_custom_admin_open_sans_font',1);
 
 //Option-Framework
 
@@ -62,7 +111,7 @@ switch(iro_opt('iro_update_source')){
 }
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);
-error_reporting(E_ALL & ~E_NOTICE);
+//error_reporting(E_ALL & ~E_NOTICE);
 
 if (!function_exists('akina_setup'))
 {
