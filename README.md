@@ -1,4 +1,4 @@
-本仓库为 CircleCrop 基于 [原作者](https://github.com/mirai-mamori/Sakurairo) 的修改版。~~（其实就是水commit）~~
+本仓库为 CircleCrop 基于 [原作者](https://github.com/mirai-mamori/Sakurairo) 的修改版。~~（其实就是水 commit）~~
 
 ## 改动内容
 
@@ -37,7 +37,8 @@ requestIdleCallback(() => {loadCSS();});
 样式表内容：
 
 ```
-	@font-face {
+@charset "UTF-8";
+@font-face {
 	font-family:cascadia code;
 	src:url(https://aiccrop.com/wp-content/self-hosted/fonts/CascadiaCode360.woff2);
 	font-weight:360;
@@ -71,7 +72,7 @@ requestIdleCallback(() => {loadCSS();});
 
 <h1 align="left">Theme Sakurairo </h1>
 
-> 一个多彩，轻松上手，体验完善，具有强大自定义功能的WordPress主题
+> 一个多彩，轻松上手，体验完善，具有强大自定义功能的 WordPress 主题
 
 [![GitHub release](https://img.shields.io/github/v/release/mirai-mamori/Sakurairo.svg?style=for-the-badge&logo=appveyor)](https://github.com/mirai-mamori/Sakurairo/releases/latest)[![GitHub Release Date](https://img.shields.io/github/release-date/mirai-mamori/Sakurairo?style=for-the-badge&logo=appveyor)](https://github.com/mirai-mamori/Sakurairo/releases)![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mirai-mamori/Sakurairo?style=for-the-badge&logo=appveyor)[![jsDelivr hits (GitHub)](https://img.shields.io/jsdelivr/gh/hm/Fuukei/Public_Repository?color=red&logo=jsdelivr&logoColor=red&style=for-the-badge)](https://www.jsdelivr.com/package/gh/mirai-mamori/sakurairo)
 
@@ -87,7 +88,7 @@ requestIdleCallback(() => {loadCSS();});
 
 - 使用本主题的博客：https://docs.fuukei.org/demo/
 
-- 主题交流：[QQ群:784229925](https://jq.qq.com/?_wv=1027&k=U5UJjRik)  ＆  [Telegram群:fksakurairo](https://t.me/fksakurairo)
+- 主题交流：[QQ 群:784229925](https://jq.qq.com/?_wv=1027&k=U5UJjRik)  ＆  [Telegram 群:fksakurairo](https://t.me/fksakurairo)
 
 - 如果在使用过程中遇到了任何问题，请**访问**本主题的 [支持文档](https://docs.fuukei.org) 
 
@@ -126,11 +127,11 @@ requestIdleCallback(() => {loadCSS();});
 
 ### 引用相关：
 
-- 本主题社交网络图标中，流畅设计图标引用于由Paradox设计的 [Fluent图标包](https://wwi.lanzous.com/ikyq5kgx0wb)
+- 本主题社交网络图标中，流畅设计图标引用于由 Paradox 设计的 [Fluent 图标包](https://wwi.lanzous.com/ikyq5kgx0wb)
 
 - 本主题社交网络图标中，沐氢图标引用于由缄默设计的 [沐氢图标包](https://www.coolapk.com/apk/com.muh2.icon)
 
-- 本主题白猫样式Logo参考原主题作者白猫，由 Hyacm 提供方案
+- 本主题白猫样式 Logo 参考原主题作者白猫，由 Hyacm 提供方案
 
 ### 依赖相关：
 
