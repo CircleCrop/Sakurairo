@@ -51,6 +51,11 @@ function add_medium_large_size( $sizes ) {
 }
 add_filter( 'image_size_names_choose', 'add_medium_large_size' );
 
+function check_php_version($preset_version) {
+    $current_version = phpversion();
+    return version_compare($current_version, $preset_version, '>=') ? true : false;
+}
+
 function rename_filename($filename) {
 $info = pathinfo($filename);
 $ext = empty($info['extension']) ? '' : '.' . $info['extension'];
@@ -66,14 +71,10 @@ function remove_custom_admin_open_sans_font() {
 	remove_action('admin_notices', 'scheme_tip');
 }
 add_action('admin_init', 'remove_custom_admin_open_sans_font',1);
+
 //Option-Framework
 
 require get_template_directory() . '/opt/option-framework.php';
-
-/**
- * composer autoload
- */
-require_once 'vendor/autoload.php';
 
 if (!function_exists('iro_opt')) {
     $GLOBALS['iro_options'] = get_option('iro_options');
@@ -92,6 +93,14 @@ if (!function_exists('iro_opt_update')) {
 }
 $shared_lib_basepath = iro_opt('shared_library_basepath') ? get_template_directory_uri() : (iro_opt('lib_cdn_path','https://fastly.jsdelivr.net/gh/mirai-mamori/Sakurairo@'). IRO_VERSION);
 $core_lib_basepath =  iro_opt('core_library_basepath') ? get_template_directory_uri() : (iro_opt('lib_cdn_path','https://fastly.jsdelivr.net/gh/mirai-mamori/Sakurairo@'). IRO_VERSION);
+
+/**
+ * composer autoload
+ */
+if ((check_php_version('7.4.0')) && iro_opt('composer_load')) {
+    require_once 'vendor/autoload.php';
+}
+
 //Update-Checker
 
 require 'update-checker/update-checker.php';
@@ -170,7 +179,7 @@ if (!function_exists('akina_setup'))
             'default-image' => '',
         )));
         /**
-         * 废弃过时的wp_title
+         * 废弃过时的 wp_title
          * @seealso https://make.wordpress.org/core/2015/10/20/document-title-in-4-4/
          */
         add_theme_support( 'title-tag' );
@@ -185,7 +194,7 @@ if (!function_exists('akina_setup'))
         remove_action('wp_head', 'index_rel_link');
         remove_action('wp_head', 'start_post_rel_link', 10, 0);
         remove_action('wp_head', 'wp_generator');
-        remove_action('wp_head', 'wp_generator'); //隐藏wordpress版本
+        remove_action('wp_head', 'wp_generator'); //隐藏 wordpress 版本
         remove_filter('the_content', 'wptexturize'); //取消标点符号转义
 
         //remove_action('rest_api_init', 'wp_oembed_register_route');
@@ -343,7 +352,7 @@ function sakura_scripts()
             '提交中....' => __('Commiting....', 'sakurairo'),
             '提交成功' => __('Succeed', 'sakurairo'),
             '每次上传上限为10张' => __('10 files max per request', 'sakurairo'),
-            "图片上传大小限制为5 MB\n\n「{0}」\n\n这张图太大啦~请重新上传噢！" => __("5 MB max per file.\n\n「{0}」\n\nThis image is too large~Please reupload!", 'sakurairo'),
+            "图片上传大小限制为 5 MB\n\n「{0}」\n\n这张图太大啦~请重新上传噢！" => __("5 MB max per file.\n\n [{0}]\n\nThis image is too large~Please reupload!", 'sakurairo'),
             '上传中...' => __('Uploading...', 'sakurairo'),
             '图片上传成功~' => __('Uploaded successfully~', 'sakurairo'),
             "上传失败！\n文件名=> {0}\ncode=> {1}\n{2}" => __("Upload failed!\nFile Name=> {0}\ncode=> {1}\n{2}", 'sakurairo'),
@@ -467,7 +476,7 @@ if (!function_exists('akina_comment_format')) {
 }
 
 /**
- * 获取访客VIP样式
+ * 获取访客 VIP 样式
  */
 function get_author_class($comment_author_email, $user_id)
 {
@@ -590,11 +599,17 @@ function get_link_items()
 }
 
 /*
- * Gravatar头像使用中国服务器
+ * Gravatar 头像使用中国服务器
  */
 function gravatar_cn(string $url):string
 {
     $gravatar_url = array('0.gravatar.com/avatar', '1.gravatar.com/avatar', '2.gravatar.com/avatar', 'secure.gravatar.com/avatar');
+    if (iro_opt('gravatar_proxy') == 'custom_proxy_address_of_gravatar') {
+        return str_replace($gravatar_url, iro_opt('custom_proxy_address_of_gravatar'), $url);
+    } else {
+        return str_replace($gravatar_url, iro_opt('gravatar_proxy'), $url);
+    } 
+}
     if (iro_opt('gravatar_proxy') == 'custom_proxy_address_of_gravatar') {
         return str_replace($gravatar_url, iro_opt('custom_proxy_address_of_gravatar'), $url);
     } else {
@@ -611,19 +626,55 @@ if (iro_opt('gravatar_proxy')) {
 function visual_resource_updates($specified_version, $option_name, $new_value) {
     $theme = wp_get_theme();
     $current_version = $theme->get('Version');
+
+    // Check if the function has already been triggered
+    $function_triggered = get_transient('visual_resource_updates_triggered18');
+    if ($function_triggered) {
+        return; // Function has already been triggered, do nothing
+    }
+
     if (version_compare($current_version, $specified_version, '>')) {
         $option_value = iro_opt($option_name);
-        if (strpos($option_value, '@') === false || substr($option_value, strpos($option_value, '@') + 1) !== $new_value) {
+        if (empty($option_value)) {
+            $option_value = "https://s.nmxc.ltd/sakurairo_vision/@2.6/";
+        } else if (strpos($option_value, '@') === false || substr($option_value, strpos($option_value, '@') + 1) !== $new_value) {
             $option_value = preg_replace('/@.*/', '@' . $new_value, $option_value);
         }
         iro_opt_update($option_name, $option_value);
+        
+        // Set transient to indicate that the function has been triggered
+        set_transient('visual_resource_updates_triggered18', true);
     }
 }
 
 visual_resource_updates('2.5.6', 'vision_resource_basepath', '2.6/');
 
+function gravater_updates($specified_version, $option_name) {
+    $theme = wp_get_theme();
+    $current_version = $theme->get('Version');
+
+    // Check if the function has already been triggered
+    $function_triggered = get_transient('gravater_updates_triggered18');
+    if ($function_triggered) {
+        return; // Function has already been triggered, do nothing
+    }
+
+    if (version_compare($current_version, $specified_version, '>')) {
+        $option_value = iro_opt($option_name);
+        if (empty($option_value) || $option_value !== 'cdn2.tianli0.top/avatar') {
+            $option_value = 'cdn2.tianli0.top/avatar';
+            iro_opt_update($option_name, $option_value);
+        }
+        
+        // Set transient to indicate that the function has been triggered
+        set_transient('gravater_updates_triggered18', true);
+    }
+}
+
+gravater_updates('2.5.6', 'gravatar_proxy');
+
 /*
- * 阻止站内文章互相Pingback
+ * 阻止站内文章互相 Pingback
  */
 function theme_noself_ping(&$links)
 {
@@ -637,7 +688,7 @@ function theme_noself_ping(&$links)
 add_action('pre_ping', 'theme_noself_ping');
 
 /*
- * 订制body类
+ * 订制 body 类
  */
 function akina_body_classes($classes)
 {
@@ -649,7 +700,7 @@ function akina_body_classes($classes)
     if (!is_singular()) {
         $classes[] = 'hfeed';
     }
-    // 定制中文字体class
+    // 定制中文字体 class
     $classes[] = 'chinese-font';
     /*if(!wp_is_mobile()) {
     $classes[] = 'serif';
@@ -664,7 +715,7 @@ function akina_body_classes($classes)
 add_filter('body_class', 'akina_body_classes');
 
 /*
- * 图片CDN
+ * 图片 CDN
  */
 add_filter('upload_dir', 'wpjam_custom_upload_dir');
 function wpjam_custom_upload_dir($uploads)
@@ -785,74 +836,77 @@ function bolo_after_wp_tiny_mce($mce_settings)
  * @M.J
  */
 //Login Page style
-function custom_login()
-{
-    require get_template_directory() . '/inc/login_addcss.php';
-    //echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
-    echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/inc/login.css?' . IRO_VERSION . '" />' . "\n";
-    //echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
-}
+$custom_login_switch = iro_opt('custom_login_switch');
 
-add_action('login_head', 'custom_login');
-
-//Login Page Title
-function custom_headertitle($title)
-{
-    return get_bloginfo('name');
-}
-add_filter('login_headertext', 'custom_headertitle');
-
-//Login Page Link
-function custom_loginlogo_url($url)
-{
-    return esc_url(home_url('/'));
-}
-add_filter('login_headerurl', 'custom_loginlogo_url');
-
-//Login Page Footer
-function custom_html()
-{
-    $loginbg = iro_opt('login_background') ?: iro_opt('vision_resource_basepath','https://s.nmxc.ltd/sakurairo_vision/@2.6/').'series/login_background.webp'; ?>
-        <script type="text/javascript">
-            document.body.insertAdjacentHTML("afterbegin", "<div class=\"loading\"><img src=\"<?=iro_opt('vision_resource_basepath','https://s.nmxc.ltd/sakurairo_vision/@2.6/')?>basic/login_loading.gif\" width=\"58\" height=\"10\"></div>");
-            document.head.insertAdjacentHTML("afterbegin", "<style>.show{opacity:1;}.hide{opacity:0;transition: opacity 400ms;}</style>");
-            const loading = document.querySelector(".loading"),
-             src = "<?= $loginbg ?>",
-                afterLoaded = () => {
-                    document.body.style.backgroundImage = `url(${src})`
-                    loading.classList.add("hide");
-                    loading.classList.remove("show");
-                    loading.addEventListener("transitionend", () => {
-                        loading.remove()
+if ($custom_login_switch) {
+    function custom_login() {
+        require get_template_directory() . '/inc/login_addcss.php';
+        //echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
+        echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/inc/login.css?' . IRO_VERSION . '" />' . "\n";
+        //echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
+    }
+    
+    add_action('login_head', 'custom_login');
+    
+    //Login Page Title
+    function custom_headertitle($title) {
+        return get_bloginfo('name');
+    }
+    add_filter('login_headertext', 'custom_headertitle');
+    
+    //Login Page Link
+    function custom_loginlogo_url($url) {
+        return esc_url(home_url('/'));
+    }
+    add_filter('login_headerurl', 'custom_loginlogo_url');
+    
+    //Login Page Footer
+    function custom_html() {
+        $loginbg = iro_opt('login_background') ?: iro_opt('vision_resource_basepath','https://s.nmxc.ltd/sakurairo_vision/@2.6/').'series/login_background.webp';
+        ?>
+            <script type="text/javascript">
+                document.body.insertAdjacentHTML("afterbegin", "<div class=\"loading\"><img src=\"<?=iro_opt('vision_resource_basepath','https://s.nmxc.ltd/sakurairo_vision/@2.6/')
+                ?>basic/login_loading.gif\" width=\"58\" height=\"10\"></div>");
+                document.head.insertAdjacentHTML("afterbegin", "<style>.show{opacity:1;}.hide{opacity:0;transition: opacity 400ms;}</style>");
+                const loading = document.querySelector(".loading"),
+                 src = "<?= $loginbg ?>",
+                    afterLoaded = () => {
+                        document.body.style.backgroundImage = `url(${src})`
+                        loading.classList.add("hide");
+                        loading.classList.remove("show");
+                        loading.addEventListener("transitionend", () => {
+                            loading.remove()
+                        });
+                    },
+                    img = document.createElement('img')
+                img.src = src
+                img.addEventListener('load',afterLoaded,{once:true})
+                <?php //3 秒钟内加载不到图片也移除加载中提示
+                ?>
+                setTimeout(afterLoaded, 3000)
+                document.addEventListener("DOMContentLoaded", ()=>{
+                document.querySelector("h1 a").style.backgroundImage = "url('<?= iro_opt('login_logo_img')?>')";
+                forgetmenot = document.querySelector(".forgetmenot");
+                if (forgetmenot){
+                    forgetmenot.outerHTML = '<p class="forgetmenot"><?=__("Remember me","sakurairo")?><input name="rememberme" id="rememberme" value="forever" type="checkbox"><label for="rememberme" style="float: right;margin-top: 5px;transform: scale(2);margin-right: -10px;"></label></p>';
+                }
+                const captchaimg = document.getElementById("captchaimg");
+                captchaimg && captchaimg.addEventListener("click",(e)=>{
+                    fetch("<?= rest_url('sakura/v1/captcha/create')?>")
+                    .then(resp=>resp.json())
+                    .then(json=>{
+                        e.target.src = json["data"];
+                        document.querySelector("input[name=\'timestamp\']").value = json["time"];
+                        document.querySelector("input[name=\'id\']").value = json["id"];
                     });
-                },
-                img = document.createElement('img')
-            img.src = src
-            img.addEventListener('load',afterLoaded,{once:true})
-            <?php //3秒钟内加载不到图片也移除加载中提示
-            ?>
-            setTimeout(afterLoaded, 3000)
-            document.addEventListener("DOMContentLoaded", ()=>{
-        document.querySelector("h1 a").style.backgroundImage = "url('<?= iro_opt('login_logo_img')?>')";
-        forgetmenot = document.querySelector(".forgetmenot");
-        if (forgetmenot){
-            forgetmenot.outerHTML = '<p class="forgetmenot"><?=__("Remember me","sakurairo")?><input name="rememberme" id="rememberme" value="forever" type="checkbox"><label for="rememberme" style="float: right;margin-top: 5px;transform: scale(2);margin-right: -10px;"></label></p>';
-        }
-        const captchaimg = document.getElementById("captchaimg");
-        captchaimg && captchaimg.addEventListener("click",(e)=>{
-            fetch("<?= rest_url('sakura/v1/captcha/create')?>")
-            .then(resp=>resp.json())
-            .then(json=>{
-                e.target.src = json["data"];
-                document.querySelector("input[name=\'timestamp\']").value = json["time"];
-                document.querySelector("input[name=\'id\']").value = json["id"];
-            });
-        })
-    }, false);
-        </script>
-    <?php
+                })
+            }, false);
+            </script>
+        <?php
+    }
+    
+    add_action('login_footer', 'custom_html');
 }
-add_action('login_footer', 'custom_html');
 
 //Login message
 //* Add custom message to WordPress login page
@@ -1006,7 +1060,7 @@ function rt_add_link_target($content)
 }
 add_filter('comment_text', 'rt_add_link_target');
 
-// 评论通过BBCode插入图片
+// 评论通过 BBCode 插入图片
 function comment_picture_support($content)
 {
     $content = str_replace('http://', 'https://', $content); // 干掉任何可能的 http
@@ -1086,12 +1140,12 @@ function push_emoji_panel()
         <a class="emoji-item">(^・ω・^ )</a>
         <a class="emoji-item">(｡･ω･｡)</a>
         <a class="emoji-item">(●￣(ｴ)￣●)</a>
-        <a class="emoji-item">ε=ε=(ノ≧∇≦)ノ</a>
+        <a class="emoji-item">ε=ε=(ノ≧∇≦) ノ</a>
         <a class="emoji-item">(’･_･‘)</a>
         <a class="emoji-item">(-_-#)</a>
         <a class="emoji-item">（￣へ￣）</a>
         <a class="emoji-item">(￣ε(#￣)Σ</a>
-        <a class="emoji-item">ヽ(‘Д’)ﾉ</a>
+        <a class="emoji-item">ヽ (‘Д’) ﾉ</a>
         <a class="emoji-item">（#-_-)┯━┯</a>
         <a class="emoji-item">(╯°口°)╯(┴—┴</a>
         <a class="emoji-item">←◡←</a>
@@ -1100,7 +1154,7 @@ function push_emoji_panel()
         <a class="emoji-item">Σ&gt;―(〃°ω°〃)♡→</a>
         <a class="emoji-item">⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</a>
         <a class="emoji-item">(╬ﾟдﾟ)▄︻┻┳═一</a>
-        <a class="emoji-item">･*･:≡(　ε:)</a>
+        <a class="emoji-item">･*･:≡( ε:)</a>
         <a class="emoji-item">(笑)</a>
         <a class="emoji-item">(汗)</a>
         <a class="emoji-item">(泣)</a>
@@ -1160,7 +1214,7 @@ function bili_smile_filter_rss($content)
     $content =  str_replace('[/img]', '" style="display: block;margin-left: auto;margin-right: auto;">', $content);
     return $content;
 }
-add_filter('comment_text_rss', 'bili_smile_filter_rss'); //替换评论rss关键词
+add_filter('comment_text_rss', 'bili_smile_filter_rss'); //替换评论 rss 关键词
 
 function toc_support($content)
 {
@@ -1739,14 +1793,14 @@ add_filter('the_content', 'html_tag_parser'); //替换文章关键词
 /*
  * QQ 评论
  */
-// 数据库插入评论表单的qq字段
+// 数据库插入评论表单的 qq 字段
 add_action('wp_insert_comment', 'sql_insert_qq_field', 10, 2);
 function sql_insert_qq_field($comment_ID, $commmentdata)
 {
     $qq = isset($_POST['new_field_qq']) ? $_POST['new_field_qq'] : false;
-    update_comment_meta($comment_ID, 'new_field_qq', $qq); // new_field_qq 是表单name值，也是存储在数据库里的字段名字
+    update_comment_meta($comment_ID, 'new_field_qq', $qq); // new_field_qq 是表单 name 值，也是存储在数据库里的字段名字
 }
-// 后台评论中显示qq字段
+// 后台评论中显示 qq 字段
 add_filter('manage_edit-comments_columns', 'add_comments_columns');
 add_action('manage_comments_custom_column', 'output_comments_qq_columns', 10, 2);
 function add_comments_columns($columns)
@@ -1758,7 +1812,7 @@ function output_comments_qq_columns($column_name, $comment_id)
 {
     switch ($column_name) {
         case "new_field_qq":
-            // 这是输出值，可以拿来在前端输出，这里已经在钩子manage_comments_custom_column上输出了
+            // 这是输出值，可以拿来在前端输出，这里已经在钩子 manage_comments_custom_column 上输出了
             echo get_comment_meta($comment_id, 'new_field_qq', true);
             break;
     }
@@ -1845,13 +1899,13 @@ if (iro_opt('sakura_widget')) {
     }
 }
 
-// 评论Markdown解析
+// 评论 Markdown 解析
 function markdown_parser($incoming_comment)
 {
     global $wpdb, $comment_markdown_content;
     $re = '/```([\s\S]*?)```[\s]*|`{1,2}[^`](.*?)`{1,2}|\[.*?\]\([\s\S]*?\)/m';
     if (preg_replace($re, 'temp', $incoming_comment['comment_content']) != strip_tags(preg_replace($re, 'temp', $incoming_comment['comment_content']))) {
-        siren_ajax_comment_err('评论只支持Markdown啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa-solid fa-code"></i> Forbidden');
+        siren_ajax_comment_err('评论只支持 Markdown 啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa-solid fa-code"></i> Forbidden');
         return ($incoming_comment);
     }
     $column_names = $wpdb->get_row("SELECT * FROM information_schema.columns where 
@@ -1869,7 +1923,7 @@ function markdown_parser($incoming_comment)
 add_filter('preprocess_comment', 'markdown_parser');
 remove_filter('comment_text', 'make_clickable', 9);
 
-//保存Markdown评论
+//保存 Markdown 评论
 function save_markdown_comment($comment_ID, $comment_approved)
 {
     global $wpdb, $comment_markdown_content;
@@ -1880,7 +1934,7 @@ function save_markdown_comment($comment_ID, $comment_approved)
 }
 add_action('comment_post', 'save_markdown_comment', 10, 2);
 
-//打开评论HTML标签限制
+//打开评论 HTML 标签限制
 function allow_more_tag_in_comment()
 {
     global $allowedtags;
@@ -1960,7 +2014,7 @@ function create_sakura_table()
 }
 add_action('after_setup_theme', 'create_sakura_table');
 
-//rest api支持
+//rest api 支持
 function permalink_tip()
 {
     if (!get_option('permalink_structure')) {
@@ -2063,7 +2117,7 @@ function conversations($attr, $content = '')
 
 //code end
 
-//WEBP支持
+//WEBP 支持
 function mimvp_filter_mime_types($array)
 {
     $array['webp'] = 'image/webp';
@@ -2077,24 +2131,34 @@ function mimvp_file_is_displayable_image($result, $path)
     //     $result = true;
     // }
     // return $result;
-    return (bool)($info); // 根据文档这里需要返回一个bool
+    return (bool)($info); // 根据文档这里需要返回一个 bool
 }
 add_filter('file_is_displayable_image', 'mimvp_file_is_displayable_image', 10, 2);
 
 //code end
 
 //展开收缩功能
-function xcollapse($atts, $content = null)
-{
-    extract(shortcode_atts(array("title" => ""), $atts));
-    return '<div style="margin: 0.5em 0;">
-    <div class="xControl">
-    <i class="fa-solid fa-angle-down" style="color: #16AF90;"></i> &nbsp;&nbsp;
-    <span class="xTitle">' . $title . '</span>&nbsp;&nbsp;==>&nbsp;&nbsp;<a href="javascript:void(0)" class="collapseButton xButton"><span class="xbtn02">展开 / 收缩</span></a>
-    <div style="clear: both;"></div>
+function xcollapse($atts, $content = null) {
+    $atts = shortcode_atts(array("title" => ""), $atts);
+    
+    ob_start(); // 开启输出缓存
+    
+    // HTML 结构
+    ?>
+    <div style="margin: 0.5em 0;">
+        <div class="xControl">
+            <i class="fa-solid fa-angle-down" style="color: #16AF90;"></i> &nbsp;&nbsp;
+            <span class="xTitle"><?= $atts['title'] ?></span>&nbsp;&nbsp;==>&nbsp;&nbsp;<a href="javascript:void(0)" class="collapseButton xButton"><span class="xbtn02"><?php _e('Expand / Collapse', 'sakurairo'); ?></span></a>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="xContent" style="display: none;"><?= do_shortcode($content) ?></div>
     </div>
-    <div class="xContent" style="display: none;">' . $content . '</div>
-    </div>';
+    <?php
+    
+    $output = ob_get_contents(); // 获取输出缓存
+    ob_end_clean(); // 清空输出缓存
+    
+    return $output; // 返回 HTML 结构
 }
 add_shortcode('collapse', 'xcollapse');
 
@@ -2134,7 +2198,7 @@ add_shortcode('collapse', 'xcollapse');
 //             $temp['header'] = $header->nodeValue ?? null;
 //             //图片上的信息
 //             $temp['info'] = $info->nodeValue ?? null;
-//             //是否竖向展示 默认false
+//             //是否竖向展示 默认 false
 //             $temp['vertical'] = $vertical->nodeValue ?? null;
 //             array_push($back['imgs'], $temp);
 //         }
