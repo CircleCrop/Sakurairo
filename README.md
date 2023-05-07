@@ -1,3 +1,15 @@
+本仓库为 CircleCrop 基于 [原作者](https://github.com/mirai-mamori/Sakurairo) 的修改版。~~（其实就是水commit）~~
+
+## 改动内容
+
+1. 添加 `svg` `ico` `cur` 媒体库上传支持；
+2. 修改生成 `webp` 缩略图质量为 `85`；
+3. 删除 `1536x1536` `2048x2048` 缩略图（Wordpress 5.3 引入但无法在媒体设置中修改），保留了 `768*9999(max)` 的缩略图尺寸，并使其可以在编辑器中使用（名称为 Medium Large）；
+4. 上传文件自动以 `md5` 重命名；
+5. 移除后端衬线字体样式；
+
+------
+
 **简体中文** | [繁體中文](README_tw.md) | [English](README_en.md) | [日本語](README_ja.md)
 
 [![image](https://s.nmxc.ltd/sakurairo_vision/@2.6/readme/banner-ver2.6.png)](https://github.com/mirai-mamori/Sakurairo)

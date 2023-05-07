@@ -10743,7 +10743,7 @@ strong {
 }
 
 .serifont {
-  font-family: 'Source Han Serif', 'Source Han Sans', serif !important;
+  /*font-family: 'Source Han Serif', 'Source Han Sans', serif !important;*/
 }
 
 .wp-block-preformatted {
