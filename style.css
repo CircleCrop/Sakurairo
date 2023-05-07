@@ -13,8 +13,7 @@ Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sakurairo
-Tags: 多彩、轻松上手、体验完善、高自定义度
-*/
+Tags: 多彩、轻松上手、体验完善、高自*/
 
 .headertop {
   animation: blur .8s;
@@ -132,10 +131,9 @@ html {
 
 body {
   margin: 0;
-  font: 300 17px;
   text-shadow: 0 0 1px rgba(0, 0, 0, .1);
-  color: #505050;
-  font-size: 15px;
+  color: #121212;
+  font-size: 17px;
   line-height: 1.5;
   background: #0000;
   background-attachment: fixed;
@@ -211,7 +209,6 @@ pre {
   font-size: 1em;
   background: rgba(255, 255, 255, .5);
   border-radius: 10px;
-  font: 15px/22px 'Fira Code', 'Noto Sans SC';
   line-height: 1.6;
   margin-bottom: 1.6em;
   max-width: 100%;
@@ -347,8 +344,8 @@ table {
 
 blockquote {
   margin: 0;
-  padding: 30px 60px;
-  position: relative;
+  padding: 8% 8%;
+	position: relative;
   quotes: "" "";
 }
 
@@ -357,7 +354,7 @@ blockquote:before {
   font-size: 3rem;
   position: absolute;
   top: -25px;
-  left: 12px;
+  left: 8px;
   color: var(--theme-skin, #505050);
   font-family: FontAwesome;
   font-weight: var(--global-font-weight);
@@ -368,7 +365,7 @@ blockquote:after {
   font-size: 3rem;
   position: absolute;
   bottom: -25px;
-  right: -5px;
+  right: 8px;
   color: var(--theme-skin, #505050);
   font-family: FontAwesome;
   font-weight: var(--global-font-weight);
@@ -640,7 +637,7 @@ input[type=week] {
 }
 
 .pattern-center header.single-header {
-  max-width: 800px;
+  max-width: 840px;
   padding: 0 10px;
   margin-left: auto;
   margin-right: auto;
@@ -650,7 +647,8 @@ input[type=week] {
 }
 
 .single-center .single-header h1.entry-title {
-  margin: 0;
+  margin: 0 0;
+	padding-bottom: 12px;
   font-size: 32px;
   width: 100%;
   font-weight: var(--global-font-weight);
@@ -659,8 +657,8 @@ input[type=week] {
 
 .single-center .entry-census {
   color: #fff;
-  font-size: 14px;
-  padding: 12px 0 0;
+  font-size: 15.5px;
+	padding: 12px 0 0 12px;
   line-height: 30px;
   font-weight: var(--global-font-weight);
 }
@@ -671,6 +669,7 @@ input[type=week] {
   border-radius: 100%;
   float: left;
   margin-right: 12px;
+	display: none
 }
 
 #moblieGoTop {
@@ -1706,38 +1705,10 @@ h3#comments-list-title {
   margin-right: auto;
 }
 
-#baguetteBox-overlay .full-image {
-  cursor: -webkit-zoom-out;
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-#baguetteBox-overlay .full-image figcaption {
-  cursor: auto;
-  display: block;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  line-height: 3;
-  color: #eee;
-  background-color: rgba(0, 0, 0, .8)
-    /*!covered#000*/
-  ;
-}
-
-#baguetteBox-overlay .full-image img {
-  cursor: auto;
-  display: inline-block;
-  width: auto;
-  height: auto;
-  max-height: 80%;
-  max-width: 80%;
-  vertical-align: middle;
-  box-shadow: 0 0 170px #ddd;
+.wp-block-image figcaption {
+	margin-bottom: 1.5em;
+	margin-top: 0.6em;
+	text-align: center;
 }
 
 .clear:after {
@@ -4063,7 +4034,7 @@ input[type=radio]:checked:before {
 
 .toc-container {
   z-index: 98;
-  width: 190px;
+  width: 200px;
   height: auto;
   background-color: rgba(255, 255, 255, 0);
   right: calc((100% - 1250px)/ 2);
@@ -4475,7 +4446,6 @@ input[type=radio]:checked:before {
   position: relative;
   background: #21252b;
   border-radius: 10px;
-  font: 15px/22px 'Fira Code', 'Noto Sans SC';
   line-height: 1.6;
   margin-bottom: 1.6em;
   margin-left: 8px;
@@ -5233,7 +5203,7 @@ small {
 img {
   border: 0;
   height: auto;
-  max-width: 100%;
+  max-width: 100%
 }
 
 svg:not(:root),
@@ -5314,6 +5284,7 @@ h6 {
 
 p {
   margin-bottom: 1.5em;
+  word-break:break-word;
 }
 
 blockquote p {
@@ -5352,6 +5323,7 @@ big {
 }
 
 * {
+	word-break: break-word;
   box-sizing: border-box;
 }
 
@@ -5370,13 +5342,15 @@ q {
 }
 
 ol {
-  margin: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
   padding-left: 0px;
   list-style: decimal;
 }
 
 ul {
-  margin: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
   padding-left: 0px;
   list-style: disc;
 }
@@ -5647,7 +5621,7 @@ object {
 
 .meta-author img {
   /**
-    *height值应与body,button,input,select,textarea{}的line-height同步
+    *height 值应与 body,button,input,select,textarea{}的 line-height 同步
     */
   max-height: 18px;
   margin: 0 5px -4px;
@@ -7813,10 +7787,6 @@ body.dark .post-list-thumb:hover {
 }
 
 @media (max-width:860px) {
-  .pattern-center header.single-header {
-    padding: 0 4%;
-  }
-
   .pattern-attachment {
     height: 280px;
   }
@@ -7824,7 +7794,7 @@ body.dark .post-list-thumb:hover {
   .pattern-center h1.cat-title,
   .pattern-center h1.entry-title,
   .single-center .single-header h1.entry-title {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 }
 
@@ -8422,10 +8392,6 @@ body.dark .post-list-thumb:hover {
     font-size: 18px;
   }
 
-  .entry-content p {
-    font-size: 14px;
-  }
-
   .site-footer {
     padding: 30px;
   }
@@ -8448,7 +8414,7 @@ body.dark .post-list-thumb:hover {
   }
 
   .site-header {
-    /*移动端logo后背板高度*/
+    /*移动端 logo 后背板高度*/
     height: 8%;
   }
 
@@ -8457,7 +8423,7 @@ body.dark .post-list-thumb:hover {
     height: 50px;
     line-height: 43px;
     margin-right: -30px;
-    /*移动端logo位置*/
+    /*移动端 logo 位置*/
     margin-top: -10px;
   }
 
@@ -9636,7 +9602,7 @@ body.dark .post-list-thumb:hover {
 
 @media (max-width: 860px) {
   .center-text {
-    /*主页一言文字logo调整*/
+    /*主页一言文字 logo 调整*/
     font-size: 30px;
   }
 
@@ -9659,10 +9625,9 @@ body.dark .post-list-thumb:hover {
     top: 45%;
   }
 
-  .focusinfo img {
-    width: 120px;
-    height: 120px;
-  }
+	.focusinfo img:not(.top-social img) {
+		display: none
+	}
 
   .top-social_v2 img {
     width: 35px;
@@ -9785,6 +9750,10 @@ body.dark .post-list-thumb:hover {
 }
 
 @media screen and (min-width: 900px) {
+	wp-block-gallery.has-nested-images figure.wp-block-image figcaption {
+		font-size: 15px;
+	}
+
   .bangumi .column {
     max-width: 25%;
     flex: 0 0 25%;
@@ -9848,7 +9817,8 @@ body.dark .post-list-thumb:hover {
 }
 
 .entry-content a {
-  color: var(--theme-skin-matching, #F9D938);
+  color: #4E90F3;
+	text-decoration: underline;
 }
 
 .entry-content a:hover {
@@ -9857,13 +9827,22 @@ body.dark .post-list-thumb:hover {
 }
 
 .entry-content code {
-  background: #505050;
-  color: var(--theme-skin-matching, #F9D938);
-  word-break: break-word;
-  font-family: 'Noto Sans SC';
-  padding: 3px;
-  text-shadow: none;
-  border-radius: 5px
+	font-family: 'Cascadia Code',Consolas,'Source Han Sans','Noto Sans SC'!important;
+	line-height: 1.5;
+	padding: 2px 3px 2px 3px;
+	margin: 1.5px;
+	background: #404040;
+	font-size: 16px;
+	color: var(--theme-skin-matching, #F9D938);
+	word-break: break-word;
+	text-shadow: none;
+	border-radius: 5px;
+	transition: all .8s;
+	box-shadow: 2px 2px 4px rgb(0 0 0 / 30%)
+}
+
+.entry-content pre code {
+	box-shadow: none
 }
 
 body.dark #main-container,
@@ -10631,6 +10610,12 @@ body.dark .searchbox.js-toggle-search:hover {
   animation: searchbox 1s;
 }
 
+body.dark .entry-content code {
+  background: var(--inline_code_background_color_in_dark_mode, #505050);
+  -webkit-transition: all .8s;
+  transition: all .8s;
+}
+
 .aplayer {
   background: rgba(255, 255, 255, .3);
   font-family: 'Noto Serif CJK SC', 'Noto Serif CJK', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia, serif
@@ -10712,7 +10697,55 @@ body.dark .searchbox.js-toggle-search:hover {
   font-size: 15px;
   font-weight: bold
 }
-
 .aplayer-lrc {
   pointer-events: none
+}
+
+.wp-block-image img {
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.36);
+	border-radius: 8px;
+	transition: transform 0.4s ease;
+	margin-top: 12px
+}
+
+.wp-block-image figcaption {
+	border-radius: 8px;
+}
+
+.wp-block-image img:hover {
+  transform: scale(1.01);
+}
+
+.wp-block-image.no-effect img {
+  box-shadow: none;
+  border-radius: 0;
+}
+.wp-block-image.no-effect img:hover {
+  transform: none;
+}
+
+code[class*=language-], pre[class*=language-] {
+	font-family:'Cascadia Code',Consolas,Monaco,'Andale Mono',monospace,'Source Han Sans','Noto Sans SC';
+}
+
+strong {
+	margin: 1px;
+}
+
+.wp-block-image .is-style-rounded img,.wp-block-image.is-style-circle-mask img,.wp-block-image.is-style-rounded img {
+	border-radius: 1.5em
+}
+
+@media (min-width:1060px) {
+	.cbp_tmtimeline {
+		column-count:2
+	}
+}
+
+.serifont {
+  font-family: 'Source Han Serif', 'Source Han Sans', serif !important;
+}
+
+.wp-block-preformatted {
+  font-family: "Source Han Sans", "Noto Sans SC", sans-serif !important;
 }

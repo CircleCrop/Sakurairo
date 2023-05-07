@@ -32,7 +32,7 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <link rel="stylesheet" href="<?= $vision_resource_basepath ?>fontawesome/css/all.min.css" type="text/css" media="all"/>
+    <link defer rel="stylesheet" href="<?= $vision_resource_basepath ?>fontawesome/css/all.min.css" type="text/css" media="all"/>
 	<?php
 	if (iro_opt('iro_meta') == true) {
 		$keywords = '';
@@ -74,7 +74,6 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 	}
 	?>
 	<?php wp_head(); ?>
-	<link rel="stylesheet" href="https://<?php echo iro_opt('gfonts_api', 'fonts.loli.net'); ?>/css?family=Noto+Serif|Noto+Serif+SC|Noto+Sans+SC|Dela+Gothic+One|Fira+Code<?php echo iro_opt('gfonts_add_name'); ?>&display=swap" media="all">
 	<script type="text/javascript">
 		if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 			alert('朋友，IE浏览器未适配哦~\n如果是 360、QQ 等双核浏览器，请关闭 IE 模式！');

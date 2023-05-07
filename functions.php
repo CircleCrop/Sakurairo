@@ -1,5 +1,4 @@
 <?php
-
 /**
  * iro functions and definitions.
  *
@@ -9,13 +8,19 @@
  */
 ini_set('display_errors',0);
 define('IRO_VERSION', wp_get_theme()->get('Version'));
-define('INT_VERSION', '18.0.0');
+define('INT_VERSION', '18.0.1');
 define('BUILD_VERSION', '2');
-
+function allow_custom_upload_mimes( $mimes ) {
+    $mimes['svg'] = 'image/svg+xml';
+    $mimes['ico'] = 'image/x-icon';
+    $mimes['cur'] = 'image/x-icon';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'allow_custom_upload_mimes' );
 add_filter('big_image_size_threshold', '__return_false', 1);
 add_filter( 'wp_editor_set_quality', function( $quality, $mime_type ) {
     if ( $mime_type === 'image/webp' ) {
-        return 84;
+        return 85;
     }
     return $quality;
 }, 10, 2 );
@@ -61,7 +66,6 @@ function remove_custom_admin_open_sans_font() {
 	remove_action('admin_notices', 'scheme_tip');
 }
 add_action('admin_init', 'remove_custom_admin_open_sans_font',1);
-
 //Option-Framework
 
 require get_template_directory() . '/opt/option-framework.php';
@@ -111,7 +115,7 @@ switch(iro_opt('iro_update_source')){
 }
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);
-//error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE);
 
 if (!function_exists('akina_setup'))
 {
@@ -531,8 +535,6 @@ function get_post_views($post_id) {
     } else {
         // 使用文章自定义字段获取浏览量
         $views = get_post_meta($post_id, 'views', true);
-        // 格式化浏览量
-        $views = restyle_text($views);
         return empty($views) ? 0 : $views;
     }
 }
@@ -593,7 +595,11 @@ function get_link_items()
 function gravatar_cn(string $url):string
 {
     $gravatar_url = array('0.gravatar.com/avatar', '1.gravatar.com/avatar', '2.gravatar.com/avatar', 'secure.gravatar.com/avatar');
-    return str_replace($gravatar_url, iro_opt('gravatar_proxy'), $url);
+    if (iro_opt('gravatar_proxy') == 'custom_proxy_address_of_gravatar') {
+        return str_replace($gravatar_url, iro_opt('custom_proxy_address_of_gravatar'), $url);
+    } else {
+        return str_replace($gravatar_url, iro_opt('gravatar_proxy'), $url);
+    } 
 }
 if (iro_opt('gravatar_proxy')) {
     add_filter('get_avatar_url', 'gravatar_cn', 4);
@@ -1247,7 +1253,7 @@ function memory_archives_list() {
         echo $output;
         return;
     }
-    $output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">' . __("All expand/collapse", "sakurairo") /*全部展开/收缩*/ . '</span>]<!-- (注: 点击月份可以展开)--></p>';
+    $output = '<div id="archives"><p style="text-align:right;"><span id="al_expand_collapse">' . __("", "") /*全部展开/收缩*/ . '</span><!-- (注: 点击月份可以展开)--></p>';
     $posts = get_posts(array(
         'posts_per_page' => -1,
         'ignore_sticky_posts' => true,
