@@ -7,6 +7,61 @@
 3. 删除 `1536x1536` `2048x2048` 缩略图（Wordpress 5.3 引入但无法在媒体设置中修改），保留了 `768*9999(max)` 的缩略图尺寸，并使其可以在编辑器中使用（名称为 Medium Large）；
 4. 上传文件自动以 `md5` 重命名；
 5. 移除后端衬线字体样式；
+6. 【样式】移除文章头像显示~~有啥好显示的大多数不都是一个人在写吗~~；
+7. 【样式】删除图片、嵌入内容等 `80px` 边距的限制~~大开版图片多好~~；
+8. 【样式】调整文章标题边距；
+9. 【样式】调整文章颜色为 `#121212`；
+10. 【样式】调整列表与段落之间的行距；
+11. 【样式】图片阴影效果；
+12. 【样式】图片悬浮放大效果；
+13. 【样式】调整代码、文字字体；
+14. 【样式】其他~~我改了但我忘了的~~优化。
+
+## 网页字体教程
+
+页脚加入以下代码以在空闲时加载字体样式表：
+
+```
+function loadCSS() {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://aiccrop.com/wp-content/self-hosted/load-font-aiccrop-blog.css';
+  document.head.appendChild(link);
+}
+requestIdleCallback(() => {loadCSS();});
+</script>
+```
+
+其中样式表链接请自行替换。
+
+样式表内容：
+
+```
+	@font-face {
+	font-family:cascadia code;
+	src:url(https://aiccrop.com/wp-content/self-hosted/fonts/CascadiaCode360.woff2);
+	font-weight:360;
+	font-display:swap;
+	font-style:normal
+}
+@font-face {
+	font-family:cascadia code;
+	src:url(https://aiccrop.com/wp-content/self-hosted/fonts/CascadiaCodeItalic360.woff2);
+	font-weight:360;
+	font-display:swap;
+	font-style:italic
+}
+@font-face {
+	font-family:source han sans;
+	src:local('Source Han Sans SC'),
+		local('Source Han Sans CN'),
+		local('Noto Sans SC'),
+		url(https://aiccrop.com/wp-content/self-hosted/fonts/SourceHanSansSC-GB2312.woff2);
+	font-display:swap
+}
+```
+
+其中，`Cascadia Code` 字体之所以先在本地查找是因为本地加载的无法选择特殊字重，我用工具从可变字体中提出来的，这样和 400Regular 的思源黑体配一些；思源黑体的“SC”、“CN”后缀分别为语言指定子集、地区指定子集，显示效果都一样；你**需要**从我的链接中下载字体并自行托管。本站字体从思源黑体官方资源中提取了 `GB2312` 子集，大小 ~850K，适合在线使用。
 
 ------
 
