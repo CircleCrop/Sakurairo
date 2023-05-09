@@ -292,6 +292,8 @@ function shuoshuo_custom_init()
         'supports' => array(
             'title',
             'editor',
+            'comments',
+            'thumbnail',
             'author'
         )
     );
