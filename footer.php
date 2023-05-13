@@ -197,21 +197,5 @@ echo iro_opt('footer_addition', '');
 </style>
 <div id="particles-js"></div>
 <script type="application/json" id="particles-js-cfg"><?=iro_opt('particles_json','')?></script>
-<script>
-function loadCSS1() {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'https://aiccrop.com/wp-content/self-hosted/load-font-aiccrop-blog.css';
-  document.head.appendChild(link);
-}
-function loadCSSfa() {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'https://vision-source.aiccrop.com/fontawesome/css/all.min.css';
-  document.head.appendChild(link);
-}
-requestIdleCallback(() => {loadCSS1();});
-requestIdleCallback(() => {loadCSSfa();});
-</script>
 <?php endif; ?>
 </html>
