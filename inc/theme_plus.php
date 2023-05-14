@@ -440,16 +440,6 @@ function header_user_menu()
     //可以测试一下对不同的固定链接的兼容性
     $login_url = iro_opt('exlogin_url') ? iro_opt('exlogin_url') : wp_login_url(iro_opt('login_urlskip') ? '' : add_query_arg($wp->query_vars, home_url($wp->request)));
   ?>
-    <div class="header-user-avatar">
-      <a href="<?= $login_url ?>">
-        <img src="<?= $ava ?>" width="30" height="30">
-      </a>
-      <div class="header-user-menu">
-        <div class="header-user-name no-logged">
-          <a id="login-link" href="<?= $login_url ?>" data-no-pjax style="font-weight:bold;text-decoration:none"><?php _e('Log in', 'sakurairo')/*登录*/ ?></a>
-        </div>
-      </div>
-    </div>
   <?php
   }
 }

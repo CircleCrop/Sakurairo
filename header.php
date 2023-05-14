@@ -32,7 +32,6 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <link defer rel="stylesheet" href="<?= $vision_resource_basepath ?>fontawesome/css/all.min.css" type="text/css" media="all"/>
 	<?php
 	if (iro_opt('iro_meta') == true) {
 		$keywords = '';
