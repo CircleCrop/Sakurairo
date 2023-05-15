@@ -4568,7 +4568,7 @@ td.hljs-ln-numbers {
   justify-content: space-between;
   flex-direction: column;
   z-index: 99;
-  transform: translateY(100%);
+  transform: translateX(50vw);
   transition: transform 0.4s ease-in-out;
   right: 50px;
   max-height: 85%;
@@ -4576,8 +4576,8 @@ td.hljs-ln-numbers {
 }
 
 .skin-menu.show {
-  transform: translateY(0);
-  transition: transform 0.4s ease-in-out;
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
   right: 50px;
 }
 
@@ -10811,4 +10811,18 @@ strong {
 
 .wp-block-preformatted {
   font-family: "Source Han Sans", "Noto Sans SC", sans-serif !important;
+}
+
+@media (max-width:860px) {
+  .pattern-center header.pattern-header {
+    top: 60px;
+    display: table;
+    margin: 0 10%;
+    height: 200px;
+  }
+  .pattern-center header.pattern-header span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center; 
+  }
 }

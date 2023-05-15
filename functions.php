@@ -360,7 +360,7 @@ function sakura_scripts()
             "上传失败！\n文件名=> {0}\ncode=> {1}\n{2}" => __("Upload failed!\nFile Name=> {0}\ncode=> {1}\n{2}", 'sakurairo'),
             '上传失败，请重试.' => __('Upload failed, please retry.', 'sakurairo'),
             '页面加载出错了 HTTP {0}' => __("Page Load failed. HTTP {0}", 'sakurairo'),
-            '很高兴你翻到这里，但是真的没有了...' => __("Glad you come, but we've got nothing left.", 'sakurairo'),
+            '---- END ----' => __("Glad you come, but we've got nothing left.", 'sakurairo'),
             "文章" => __("Post", 'sakurairo'),
             "标签" => __("Tag", 'sakurairo'),
             "分类" => __("Category", 'sakurairo'),
