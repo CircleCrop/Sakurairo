@@ -10823,6 +10823,7 @@ strong {
   .pattern-center header.pattern-header span {
     display: table-cell;
     vertical-align: middle;
-    text-align: center; 
+    text-align: center;
+    width: 80vw;
   }
 }
