@@ -4568,7 +4568,7 @@ td.hljs-ln-numbers {
   justify-content: space-between;
   flex-direction: column;
   z-index: 99;
-  transform: translateX(50vw);
+  transform: translateX(400px);
   transition: transform 0.4s ease-in-out;
   right: 50px;
   max-height: 85%;
@@ -10814,13 +10814,13 @@ strong {
 }
 
 @media (max-width:860px) {
-  .pattern-center header.pattern-header {
+  .pattern-center header.pattern-header:not(.single-header) {
     top: 60px;
     display: table;
     margin: 0 10%;
     height: 200px;
   }
-  .pattern-center header.pattern-header span {
+  .pattern-center header.pattern-header span:not(.single-header) {
     display: table-cell;
     vertical-align: middle;
     text-align: center;

@@ -2064,7 +2064,6 @@ function show_card($attr, $content = '')
     <div class="img" alt="Show-Card" style="background:url('. $img .');background-size:cover;background-position: center;">
     <a href="'. $content .'"><button class="showcard-button" style="color:'. $color .' !important;"><i class="fa-solid fa-angle-right"></i></button> </a>
     </div>
-    <br>
     <div class="icon">
     <i class="'. $icon .'"></i>
     </div>
