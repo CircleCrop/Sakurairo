@@ -1087,51 +1087,7 @@ add_filter('comment_text', 'tieba_smile_filter'); //替换评论关键词
 
 function push_emoji_panel()
 {
-    return '
-        <a class="emoji-item">(⌒▽⌒)</a>
-        <a class="emoji-item">（￣▽￣）</a>
-        <a class="emoji-item">(=・ω・=)</a>
-        <a class="emoji-item">(｀・ω・´)</a>
-        <a class="emoji-item">(〜￣△￣)〜</a>
-        <a class="emoji-item">(･∀･)</a>
-        <a class="emoji-item">(°∀°)ﾉ</a>
-        <a class="emoji-item">(￣3￣)</a>
-        <a class="emoji-item">╮(￣▽￣)╭</a>
-        <a class="emoji-item">(´_ゝ｀)</a>
-        <a class="emoji-item">←_←</a>
-        <a class="emoji-item">→_→</a>
-        <a class="emoji-item">(&lt;_&lt;)</a>
-        <a class="emoji-item">(&gt;_&gt;)</a>
-        <a class="emoji-item">(;¬_¬)</a>
-        <a class="emoji-item">("▔□▔)/</a>
-        <a class="emoji-item">(ﾟДﾟ≡ﾟдﾟ)!?</a>
-        <a class="emoji-item">Σ(ﾟдﾟ;)</a>
-        <a class="emoji-item">Σ(￣□￣||)</a>
-        <a class="emoji-item">(’；ω；‘)</a>
-        <a class="emoji-item">（/TДT)/</a>
-        <a class="emoji-item">(^・ω・^ )</a>
-        <a class="emoji-item">(｡･ω･｡)</a>
-        <a class="emoji-item">(●￣(ｴ)￣●)</a>
-        <a class="emoji-item">ε=ε=(ノ≧∇≦) ノ</a>
-        <a class="emoji-item">(’･_･‘)</a>
-        <a class="emoji-item">(-_-#)</a>
-        <a class="emoji-item">（￣へ￣）</a>
-        <a class="emoji-item">(￣ε(#￣)Σ</a>
-        <a class="emoji-item">ヽ (‘Д’) ﾉ</a>
-        <a class="emoji-item">（#-_-)┯━┯</a>
-        <a class="emoji-item">(╯°口°)╯(┴—┴</a>
-        <a class="emoji-item">←◡←</a>
-        <a class="emoji-item">( ♥д♥)</a>
-        <a class="emoji-item">_(:3」∠)_</a>
-        <a class="emoji-item">Σ&gt;―(〃°ω°〃)♡→</a>
-        <a class="emoji-item">⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</a>
-        <a class="emoji-item">(╬ﾟдﾟ)▄︻┻┳═一</a>
-        <a class="emoji-item">･*･:≡( ε:)</a>
-        <a class="emoji-item">(笑)</a>
-        <a class="emoji-item">(汗)</a>
-        <a class="emoji-item">(泣)</a>
-        <a class="emoji-item">(苦笑)</a>
-    ';
+    return '';
 }
 
 // bilibili smiles

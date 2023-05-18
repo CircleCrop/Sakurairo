@@ -70,10 +70,6 @@
 						'comment_field' => '<p style="font-style:italic"><a href="https://segmentfault.com/markdown" target="_blank"><i class="fa-brands fa-markdown" style="color:var(--comment_area_matching);"></i></a> Markdown Supported while <i class="fa-solid fa-code"></i> Forbidden</p><div class="comment-textarea"><textarea placeholder="' . __("You are a surprise that I will only meet once in my life", "sakurairo") . ' ..." name="comment" class="commentbody" id="comment" rows="5" tabindex="4"></textarea><label class="input-label">' . __("You are a surprise that I will only meet once in my life", "sakurairo") . ' ...</label></div>
                         <div id="upload-img-show"></div>
                         <!--插入表情面版-->
-                        <p id="emotion-toggle" class="no-select">
-                            <span class="emotion-toggle-off">' . __("Click me OωO", "sakurairo")/*戳我试试 OωO*/ . '</span>
-                            <span class="emotion-toggle-on">' . __("Woooooow ヾ(≧∇≦*)ゝ", "sakurairo")/*嘿嘿嘿 ヾ(≧∇≦*)ゝ*/ . '</span>
-                        </p>
                         <div class="emotion-box no-select">
                             <table class="motion-switcher-table">
                                 <tr>'.$bilibili_smile.'
