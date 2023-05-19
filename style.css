@@ -6,7 +6,7 @@ Theme URI: https://github.com/mirai-mamori/Sakurairo
 Author: Created by Fuukei
 Author URI: https://fuukei.org/
 Description: A colorful, Easy-to-use, Perfect Experience, and Powerful Customizable WordPress Theme (Based on Theme Sakura)
-Version: 2.6.1
+Version: 2.6.1.1
 Tested up to: 6.2
 Requires at least: 5.8
 Requires PHP: 7.2
@@ -157,11 +157,10 @@ a {
   text-decoration: none;
   color: var(--theme-skin-matching, #f9d938);
   outline: 0;
-  -webkit-transition: color 0.2s ease-out, border 0.2s ease-out,
-    opacity 0.2s ease-out;
-  -moz-transition: color 0.2s ease-out, border 0.2s ease-out,
-    opacity 0.2s ease-out;
-  transition: color 0.2s ease-out, border 0.2s ease-out, opacity 0.2s ease-out;
+  -webkit-transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
+  -moz-transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
+  transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
+  word-break:break-word;
 }
 
 h1 {
@@ -5037,7 +5036,7 @@ summary,
 
 figure {
   display: block;
-  margin: 1em 0;
+  margin: 1em;
 }
 
 audio,
@@ -10532,7 +10531,7 @@ body.dark .searchbox.js-toggle-search:hover {
   animation: searchbox 1s;
 }
 
-body.dark .entry-content code {
+body.dark .entry-content code:not(pre code) {
   background: var(--inline_code_background_color_in_dark_mode, #505050);
   -webkit-transition: all 0.8s;
   transition: all 0.8s;
