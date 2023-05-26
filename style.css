@@ -157,10 +157,12 @@ a {
   text-decoration: none;
   color: var(--theme-skin-matching, #f9d938);
   outline: 0;
-  -webkit-transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
-  -moz-transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
-  transition: color .2s ease-out, border .2s ease-out, opacity .2s ease-out;
-  word-break:break-word;
+  -webkit-transition: color 0.2s ease-out, border 0.2s ease-out,
+    opacity 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out, border 0.2s ease-out,
+    opacity 0.2s ease-out;
+  transition: color 0.2s ease-out, border 0.2s ease-out, opacity 0.2s ease-out;
+  word-break: break-word;
 }
 
 h1 {
@@ -618,7 +620,7 @@ input[type="week"] {
 
 .single-center .single-header h1.entry-title {
   margin: 0 0;
-  padding-bottom: 12px;
+  padding: 12px;
   font-size: 32px;
   width: 100%;
   font-weight: var(--global-font-weight);
@@ -9350,8 +9352,7 @@ body.dark .post-list-thumb:hover {
 
 @media (max-width: 1160px) {
   .toc-container {
-    /*display: none;*/
-
+    display: none;
   }
 }
 
@@ -10656,18 +10657,18 @@ body.dark .entry-content code:not(pre code) {
   pointer-events: none;
 }
 
-.wp-block-image img {
+img[class*="wp-image-"] {
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.36);
   border-radius: 8px;
   transition: transform 0.4s ease;
   margin-top: 12px;
 }
-
-.wp-block-image figcaption {
+.wp-block-img figcaption,
+.size-square700-thumb img {
   border-radius: 8px;
 }
 
-.wp-block-image img:hover {
+img[class*="wp-image-"]:hover {
   transform: scale(1.01);
 }
 
@@ -10675,8 +10676,16 @@ body.dark .entry-content code:not(pre code) {
   box-shadow: none;
   border-radius: 0;
 }
+
 .wp-block-image.no-effect img:hover {
   transform: none;
+}
+
+.size-square700-thumb {
+  display: inline-block;
+  width: 32%;
+  height: 32%;
+  margin: 0.64%;
 }
 
 code[class*="language-"],
@@ -10685,20 +10694,15 @@ pre[class*="language-"] {
     "Source Han Sans", "Noto Sans SC";
 }
 
-strong {
-  margin: 1px;
+strong,
+em {
+  margin: 0px 1px;
 }
 
 .wp-block-image .is-style-rounded img,
 .wp-block-image.is-style-circle-mask img,
 .wp-block-image.is-style-rounded img {
   border-radius: 1.5em;
-}
-
-@media (min-width: 1060px) {
-  .cbp_tmtimeline {
-    column-count: 2;
-  }
 }
 
 .wp-block-preformatted {

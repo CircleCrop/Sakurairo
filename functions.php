@@ -43,13 +43,20 @@ function remove_extra_image_sizes() {
         }
     }
 }
+add_image_size( 'square700-thumb', 700, 700, true );
 //add_medium_large_size
-add_action('init', 'remove_extra_image_sizes',1);
-function add_medium_large_size( $sizes ) {
-    $sizes['medium_large'] = __( 'Medium Large' );
-    return $sizes;
+function wpb_custom_image_sizes( $size_names ) {
+    $new_sizes = array(
+        'medium_large' => 'Medium Large',
+        'square700-thumb' => 'Square Thumbmail'
+    );
+    return array_merge( $size_names, $new_sizes );
 }
-add_filter( 'image_size_names_choose', 'add_medium_large_size' );
+add_filter( 'image_size_names_choose', 'wpb_custom_image_sizes' );
+function check_php_version($preset_version) {
+    $current_version = phpversion();
+    return version_compare($current_version, $preset_version, '>=') ? true : false;
+}
 
 function check_php_version($preset_version) {
     $current_version = phpversion();
@@ -557,10 +564,10 @@ function is_webp(): bool
 
 /**
  * 获取友情链接列表
- * @Param: string $sorting_mode 友情链接列表排序模式，name、updated、rating、rand四种模式
+ * @Param: string $sorting_mode 友情链接列表排序模式，name、updated、rating、rand 四种模式
  * @Param: string $link_order 友情链接列表排序方法，ASC、DESC（升序或降序）
- * @Param: mixed $id 友情链接ID
- * @Param: string $output HTML格式化输出
+ * @Param: mixed $id 友情链接 ID
+ * @Param: string $output HTML 格式化输出
  */
 function get_the_link_items($id = null)
 {   $sorting_mode = iro_opt('friend_link_sorting_mode');

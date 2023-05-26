@@ -11,18 +11,11 @@
 .entry-content .begin,
 .single-begin {
   float: left;
-  font-size: 3.6em;
+  font-size: 3.1em;
   line-height: 1em;
   margin-right: 3px;
   margin-top: 2px;
   font-weight: 700;
-}
-
-@media screen and (max-width: 860px) {
-  .entry-content .begin,
-  .single-begin {
-    margin-top: 6px;
-  }
 }
 
 .entry-content ul {
@@ -104,17 +97,7 @@ h1.entry-title {
   border: 0;
   text-align: center;
   background: 0 0;
-}
-
-.entry-content hr:before {
-  content: "...";
-  display: inline-block;
-  margin-left: 0.6em;
-  color: rgba(0, 0, 0, 0.8);
-  position: relative;
-  top: -30px;
-  font-size: 28px;
-  letter-spacing: 0.6em;
+  background-color: #000000;
 }
 
 .entry-content table {
