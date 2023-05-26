@@ -58,11 +58,6 @@ function check_php_version($preset_version) {
     return version_compare($current_version, $preset_version, '>=') ? true : false;
 }
 
-function check_php_version($preset_version) {
-    $current_version = phpversion();
-    return version_compare($current_version, $preset_version, '>=') ? true : false;
-}
-
 function rename_filename($filename) {
 $info = pathinfo($filename);
 $ext = empty($info['extension']) ? '' : '.' . $info['extension'];
