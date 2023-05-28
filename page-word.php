@@ -3,13 +3,21 @@
 /**
  * Template Name: 说说模版
  */
- 
 get_header();
 ?>
  
     <div id="primary" class="content-area">
         <main id="main" class="site-main" role="main">
-        <?php
+			<div class="entry-content">
+				<?php
+				the_content( '', true );
+				wp_link_pages( array(
+					'before' => '<div class="page-links">' . __( 'Pages:', 'sakurairo' ),
+					'after'  => '</div>',
+				) );
+				?>
+			</div><!-- .entry-content -->
+		<?php
         $args = array(
         'post_type' => 'shuoshuo',
         'post_status' => 'publish',

@@ -5038,7 +5038,6 @@ summary,
 
 figure {
   display: block;
-  margin: 1em;
 }
 
 audio,
@@ -10672,20 +10671,45 @@ img[class*="wp-image-"]:hover {
   transform: scale(1.01);
 }
 
-.wp-block-image.no-effect img {
+.no-effect img {
   box-shadow: none;
   border-radius: 0;
 }
 
-.wp-block-image.no-effect img:hover {
+.no-effect img:hover {
   transform: none;
 }
 
 .size-square700-thumb {
   display: inline-block;
-  width: 32%;
-  height: 32%;
-  margin: 0.64%;
+  width: 32.4%;
+  height: 32.4%;
+  margin: 0.65%;
+}
+
+@media (min-width: 701px) {
+  a:nth-child(3n-2) > img.size-square700-thumb {
+    margin-left: 0%;
+  }
+
+  a:nth-child(3n) > img.size-square700-thumb {
+    margin-right: 0%;
+  }
+}
+
+@media (max-width: 700px) {
+  .size-square700-thumb {
+    display: inline-block;
+    width: 49%;
+    height: 49%;
+    margin: 0.98%;
+  }
+  a:nth-child(2n-1) > img.size-square700-thumb {
+    margin-left: 0%;
+  }
+  a:nth-child(2n) > img.size-square700-thumb {
+    margin-right: 0%;
+  }
 }
 
 code[class*="language-"],
