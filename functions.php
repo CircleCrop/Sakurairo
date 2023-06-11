@@ -663,7 +663,6 @@ function gfonts_updates($specified_version, $option_name) {
     $function_triggered = get_transient('gfonts_updates_triggered18');
     return;
 }
-
 gfonts_updates('2.5.6', 'gfonts_api');
 
 function gravater_updates($specified_version, $option_name) {
@@ -673,7 +672,6 @@ function gravater_updates($specified_version, $option_name) {
     $function_triggered = get_transient('gravater_updates_triggered18');
     return;
 }
-
 gravater_updates('2.5.6', 'gravatar_proxy');
 
 /*
