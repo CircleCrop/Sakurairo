@@ -8,7 +8,7 @@
  */
 ini_set('display_errors',0);
 define('IRO_VERSION', wp_get_theme()->get('Version'));
-define('INT_VERSION', '18.1.1');
+define('INT_VERSION', '18.2.0');
 define('BUILD_VERSION', '2');
 function allow_custom_upload_mimes( $mimes ) {
     $mimes['svg'] = 'image/svg+xml';
@@ -655,6 +655,26 @@ function visual_resource_updates($specified_version, $option_name, $new_value) {
 }
 
 visual_resource_updates('2.5.6', 'vision_resource_basepath', '2.6/');
+
+function gfonts_updates($specified_version, $option_name) {
+    $theme = wp_get_theme();
+    $current_version = $theme->get('Version');
+    // Check if the function has already been triggered
+    $function_triggered = get_transient('gfonts_updates_triggered18');
+    return;
+}
+
+gfonts_updates('2.5.6', 'gfonts_api');
+
+function gravater_updates($specified_version, $option_name) {
+    $theme = wp_get_theme();
+    $current_version = $theme->get('Version');
+    // Check if the function has already been triggered
+    $function_triggered = get_transient('gravater_updates_triggered18');
+    return;
+}
+
+gravater_updates('2.5.6', 'gravatar_proxy');
 
 /*
  * 阻止站内文章互相 Pingback
@@ -2296,3 +2316,20 @@ function should_show_title():bool{
     || !get_post_thumbnail_id($id) 
     && $use_as_thumb != 'true' && !get_post_meta($id, 'video_cover', true);
 }
+
+/**
+ * 修复 WordPress 搜索结果为空，返回为 200 的问题。
+ * @author ivampiresp <im@ivampiresp.com>
+ */
+function search_404_fix_template_redirect()
+{
+    if (is_search()) {
+        global $wp_query;
+
+        if ($wp_query->found_posts == 0) {
+            status_header(404);
+        }
+    }
+}
+
+add_action('template_redirect', 'search_404_fix_template_redirect');
