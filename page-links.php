@@ -16,12 +16,12 @@ get_header();
 			<?php if (iro_opt('article_auto_toc', 'true') && check_title_tags($post->post_content)) { //加载目录?>
 			<div class="has-toc have-toc"></div>
 			<?php } ?>
-			<div class="entry-content">
-				<?php the_content( '', true ); ?>
-			</div>			
 			<div class="links">
 				<?php echo get_link_items(); ?>
 			</div>
+			<div class="entry-content">
+				<?php the_content( '', true ); ?>
+			</div>			
 		</article>
 	<?php get_template_part('layouts/sidebox'); //加载目录容器?> 
 	<?php endwhile; ?>
