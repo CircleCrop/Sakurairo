@@ -456,7 +456,7 @@ font-size: <?=iro_opt('article_title_font_size'); ?>px ;
 
 /*鼠标*/
 body{
-cursor: url(<?=iro_opt('cursor_nor'); ?>), auto;
+cursor: <?=iro_opt('cursor_nor'); ?>, auto;
 }
 
 .headertop-down,
@@ -472,7 +472,7 @@ cursor: url(<?=iro_opt('cursor_nor'); ?>), auto;
 .tieba-container span,
 #moblieGoTop,
 #changskin{
-cursor: url(<?=iro_opt('cursor_no'); ?>), auto;
+cursor: <?=iro_opt('cursor_no'); ?>, auto;
 }
 
 a,
@@ -480,18 +480,18 @@ a,
 .font-family-controls button,
 .menu-list li,.ins-section .ins-search-item,
 .ins-section .ins-search-item .ins-search-preview{
-cursor: url(<?=iro_opt('cursor_ayu'); ?>), auto;
+cursor: <?=iro_opt('cursor_ayu'); ?>, auto;
 }
 
 p,
 .highlight-wrap code,
 .highlight-wrap,
 .hljs-ln-code .hljs-ln-line{
-cursor: url(<?=iro_opt('cursor_text'); ?>), auto;
+cursor: <?=iro_opt('cursor_text'); ?>, auto;
 }
 
 a:active{
-cursor: url(<?=iro_opt('cursor_work'); ?>), alias;
+cursor: <?=iro_opt('cursor_work'); ?>, alias;
 }
 
 /*背景类*/
