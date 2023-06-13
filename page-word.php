@@ -63,10 +63,15 @@ get_header();
                                 </span>
                                 <div class="cbp_tmlabel">
                                     <object class="entry-content-da">
-                                        <ins class="adsbygoogle" style="display:block;background-color:var(--shuoshuo_background_color1,#ee9999)" data-ad-format="fluid"
-                                            data-ad-layout-key="-c0+4y+4e+x-1w" data-ad-client="ca-pub-6013103294751614"
-                                            data-ad-slot="1055170919"></ins>
+                                        <ins class="adsbygoogle"
+                                            style="display:block;background-color:var(--shuoshuo_background_color1,#ee9999)"
+                                            data-ad-format="fluid" data-ad-layout-key="-c0+4y+4e+x-1w"
+                                            data-ad-client="ca-pub-6013103294751614" data-ad-slot="1055170919"></ins>
                                     </object>
+                                    <p class="shuoshuo_meta">
+                                        <i class="fa-regular fa-clock"></i> 2023/06/12 20:22 <span class="comments-number"><i
+                                                class="fa-regular fa-comments"></i> 8 </span>
+                                    </p>
                                 </div>
                             </li>
                         <?php endif; ?>
