@@ -7515,6 +7515,16 @@ body:not(.heimu_toggle_on) .new:hover .heimu.off {
   vertical-align: middle;
 }
 
+.comment-form-cookies-consent {
+  margin-bottom: 15px !important;
+  line-height: 1.5 !important;
+}
+
+.comment-form-mailpoet {
+  margin-bottom: 18px !important;
+  line-height: 1.5 !important;
+}
+
 body.theme-dark .cbp_tmtimeline::before {
   background: RGBA(255, 255, 255, 0.06);
 }
@@ -10731,4 +10741,21 @@ em {
 
 .wp-block-preformatted {
   font-family: "Source Han Sans", "Noto Sans SC", sans-serif !important;
+}
+
+input#wp-comment-cookies-consent,
+#mailpoet_subscribe_on_comment {
+	width: 17px;
+	height: 17px;
+  color: #555;
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 0 3px 0 0;
+	margin-bottom: -1px;
+}
+
+.comment-form-mailpoet, .comment-form-cookies-consent {
+	font-size: 14px;
+  color: #555;
+	line-height: 1;
 }

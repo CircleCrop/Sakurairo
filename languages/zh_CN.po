@@ -67,7 +67,7 @@ msgstr "我不是机器人"
 
 #: comments.php:58
 msgid "Comment in private"
-msgstr "私密评论"
+msgstr "私密评论 保护隐私"
 
 #: comments.php:59
 msgid "Comment reply notify"
@@ -95,15 +95,15 @@ msgstr "戳我呀 OωO"
 
 #: comments.php:75
 msgid "Woooooow ヾ(≧∇≦*)ゝ"
-msgstr "嘿嘿嘿 ヾ(≧∇≦*)ゝ"
+msgstr "嘿嘿嘿 ヾ (≧∇≦*) ゝ"
 
 #: comments.php:96
 msgid "Auto pull nickname and avatar with a QQ num. entered"
-msgstr "输入QQ号将自动拉取昵称和头像"
+msgstr "输入 QQ 号将自动拉取昵称和头像"
 
 #: comments.php:96
 msgid "Nickname or QQ number"
-msgstr "昵称或QQ号"
+msgstr "昵称或 QQ 号"
 
 #: comments.php:96
 msgid "Name* "
@@ -223,7 +223,7 @@ msgstr "拷贝代码"
 msgid ""
 "Your cover API seems to not support Cross Origin Access. In this case, Cover "
 "Cache won't take effect."
-msgstr "你的封面API好像不支持跨域调用,这种情况下缓存是不会生效的哦。"
+msgstr "你的封面 API 好像不支持跨域调用，这种情况下缓存是不会生效的哦。"
 
 #: functions.php:300
 msgid "Commiting...."
@@ -235,7 +235,7 @@ msgstr "成功"
 
 #: functions.php:302
 msgid "10 files max per request"
-msgstr "每次上传上限为10张"
+msgstr "每次上传上限为 10 张"
 
 #: functions.php:303
 msgid ""
@@ -244,7 +244,7 @@ msgid ""
 "「{0}」\n"
 "\n"
 "This image is too large~Please reupload!"
-msgstr "图片上传大小限制为5 MB\\n\\n「{0}」\\n\\n这张图太大啦~请重新上传噢！"
+msgstr "图片上传大小限制为 5 MB\\n\\n「{0}」\\n\\n这张图太大啦~请重新上传噢！"
 
 #: functions.php:304
 msgid "Uploading..."
@@ -264,7 +264,7 @@ msgstr "上传失败！\\n文件名=> {0}\\ncode=> {1}\\n{2}"
 
 #: functions.php:307
 msgid "Upload failed, please retry."
-msgstr "上传失败，请重试."
+msgstr "上传失败，请重试。"
 
 #: functions.php:308
 msgid "Page Load failed. HTTP {0}"
@@ -438,7 +438,7 @@ msgstr "博主似乎隐藏了追番列表。"
 
 #: inc/classes/BilibiliFavList.php:90
 msgid "Item count: "
-msgstr "内容数量: "
+msgstr "内容数量："
 
 #: inc/classes/BilibiliFavList.php:91
 msgid "Expand"
@@ -573,7 +573,7 @@ msgstr "发布于 "
 
 #: inc/theme_plus.php:134
 msgid "Please upgrade wordpress to version 4.4+"
-msgstr "请升级到4.4以上版本"
+msgstr "请升级到 4.4 以上版本"
 
 #: inc/theme_plus.php:241
 msgid "Login successful, "
@@ -624,7 +624,7 @@ msgstr[0] "次阅读"
 #: inc/theme_plus.php:314 inc/theme_plus.php:374
 #, php-format
 msgid "Search results for \" %s \""
-msgstr "关于“ %s ”的搜索结果"
+msgstr "关于“ %s”的搜索结果"
 
 #: inc/theme_plus.php:391 tpl/content-thumb.php:28 tpl/content-thumb.php:34
 msgid "Your browser does not support HTML5 video."
@@ -725,7 +725,7 @@ msgstr "没有找到你想要的，看看其他的吧。"
 
 #: tpl/content-none.php:43
 msgid "We didn't seem to find what you want. Maybe you can search for it."
-msgstr "我们似乎没有找到你想要的东西. 或许你可以搜索一下试试."
+msgstr "我们似乎没有找到你想要的东西。或许你可以搜索一下试试。"
 
 #: tpl/content-page.php:24 tpl/content-single.php:45 tpl/single-image.php:34
 msgid "Pages:"
@@ -790,7 +790,7 @@ msgstr "该电子邮件地址已经被注册。"
 
 #: user/page-register.php:34
 msgid "Password length is at least 6 digits."
-msgstr "密码长度至少6位。"
+msgstr "密码长度至少 6 位。"
 
 #: user/page-register.php:36
 msgid "Inconsistent password entered twice."
@@ -845,7 +845,7 @@ msgid ""
 "A colorful, Easy-to-use, Perfect Experience, and Powerful Customizable "
 "WordPress Theme (Based on Theme Sakura)"
 msgstr ""
-"一个多彩，轻松上手，体验完善，具有强大自定义功能的WordPress主题（基于Sakura主"
+"一个多彩，轻松上手，体验完善，具有强大自定义功能的 WordPress 主题（基于 Sakura 主"
 "题）"
 
 #. Author of the plugin/theme
