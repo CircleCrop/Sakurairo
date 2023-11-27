@@ -119,10 +119,10 @@ $reception_background = iro_opt('reception_background');
   <?php if (iro_opt('widget_daynight', 'true')): ?>
     <ul class="menu-list">
       <li id="white-bg" title="<?=__('Light Mode','sakurairo');?>" >
-        <i class="fa-solid fa-display fa-sm"></i>
+        <i class="fa-regular fa-sun" style="scale: 0.98;"></i>
       </li><!--Default-->
       <li id="dark-bg" title="<?=__('Dark Mode','sakurairo');?>" >
-        <i class="fa-regular fa-moon"></i>
+        <i class="fa-regular fa-moon" style="scale: 1.04;"></i>
       </li><!--Night-->
     </ul>
   <?php endif; ?>

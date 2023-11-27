@@ -144,7 +144,7 @@ if(!function_exists('siren_ajax_comment_err')) {
 // 机器评论验证
 function siren_robot_comment(){
   if ( !$_POST['no-robot'] && !is_user_logged_in()) {
-     siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
+     siren_ajax_comment_err('上车请刷卡。<br>Please confirm you are not a robot.');
   }
 }
 if(iro_opt('not_robot')) add_action('pre_comment_on_post', 'siren_robot_comment');
@@ -793,6 +793,27 @@ function siren_get_os(string $ua):array{
     $title = 'Linux';
     $icon = 'linux';
   }
+  /*if (isset($_SERVER['HTTP_SEC_CH_UA_PLATFORM_VERSION']) and $title == "Windows 10/11") {
+    $platformVersion = (int)str_replace('"', '', stripslashes($_SERVER['HTTP_SEC_CH_UA_PLATFORM_VERSION']));
+    $platformarch = (int)str_replace('"', '', stripslashes($_SERVER['HTTP_SEC_CH_UA_ARCH']));
+    //Win10
+    if ($platformVersion > 1 and $platformVersion < 10) {
+      $title = 'Windows 10 Before 2004';
+    }elseif ($platformVersion == 10) {
+      $title = 'Windows 10';
+    //Win11
+    }elseif ($platformVersion > 10 and $platformVersion < 15) {
+      $title = 'Windows 11 Preview';
+      $icon = 'win11';
+    }elseif ($platformVersion >= 15) {
+      $title = 'Windows 11';
+      $icon = 'win11';
+    }
+    //arch
+    if ($platformarch == 'onarm') {
+      $title = $title + 'ARM';
+    }
+  }*/
   return [
     'title' => $title,
     'icon' => $icon

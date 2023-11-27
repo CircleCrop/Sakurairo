@@ -58,13 +58,6 @@ function check_php_version($preset_version) {
     return version_compare($current_version, $preset_version, '>=') ? true : false;
 }
 
-function rename_filename($filename) {
-$info = pathinfo($filename);
-$ext = empty($info['extension']) ? '' : '.' . $info['extension'];
-$name = basename($filename, $ext);
-return substr(md5($name), 0, 20) . $ext;
-}
-add_filter('sanitize_file_name', 'rename_filename');
 // Remove Font @ Admin
 function remove_custom_admin_open_sans_font() {
     remove_action('admin_head', 'custom_admin_open_sans_font');
@@ -484,6 +477,7 @@ if (!function_exists('akina_comment_format')) {
  */
 function get_author_class($comment_author_email, $user_id)
 {
+    /*
     global $wpdb;
     $author_count = count($wpdb->get_results(
         "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "
@@ -498,6 +492,7 @@ function get_author_class($comment_author_email, $user_id)
 
     // $Lv = $author_count < 5 ? 0 : ($author_count < 10 ? 1 : ($author_count < 20 ? 2 : ($author_count < 40 ? 3 : ($author_count < 80 ? 4 : ($author_count < 160 ? 5 : 6)))));
     echo "<span class=\"showGrade{$Lv}\" title=\"Lv{$Lv}\"><img src=\"".iro_opt('vision_resource_basepath','https://s.nmxc.ltd/sakurairo_vision/@2.6/')."comment_level/level_{$Lv}.svg\" style=\"height: 1.5em; max-height: 1.5em; display: inline-block;\"></span>";
+    */
 }
 
 /**

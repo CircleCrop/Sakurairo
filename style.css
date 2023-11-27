@@ -102,7 +102,7 @@ Tags: 多彩、轻松上手、体验完善、高自*/
   will-change: transform;
   float: left;
   width: 100%;
-  height: 300px;
+  height: 290px;
   position: relative;
   margin: 20px 0 20px;
   border-radius: 10px;
@@ -1039,6 +1039,7 @@ input[type="week"] {
   overflow: hidden;
   font-size: 18px;
   word-wrap: break-word;
+  margin: 15px 0;
 }
 
 .post-date {
@@ -1053,17 +1054,9 @@ input[type="week"] {
   transition: all 0.8s ease !important;
 }
 
-.post-meta {
-  color: #888;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: var(--global-font-weight);
-}
-
+.post-meta,
 .post-meta a {
-  color: #888;
+  color: #504e4e;
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1072,7 +1065,7 @@ input[type="week"] {
 }
 
 .post-thumb a {
-  height: 300px;
+  height: 290px;
   position: relative;
   display: block;
   background-repeat: no-repeat;
@@ -1094,7 +1087,7 @@ input[type="week"] {
   float: right;
   padding-right: 30px;
   padding-left: 0;
-  width: 40%;
+  width: 42%;
   margin: 20px 10px 0 10px;
 }
 
@@ -1103,10 +1096,12 @@ input[type="week"] {
   width: 100%;
   right: 0;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 12px;
   z-index: 50;
   color: rgba(0, 0, 0, 0.66);
   transition: all 0.8s ease !important;
+  overflow: hidden;
+  max-height: 100px;
 }
 
 .ai-excerpt-tip {
@@ -2365,6 +2360,7 @@ h1.main-title {
   padding-bottom: 10px;
   padding-left: 3px;
   padding-right: 3px;
+  margin-top: 0px;
   margin-bottom: 30px;
   text-underline-offset: 10px;
   text-decoration: underline wavy var(--post_list_matching_color, #ffeeeb);
@@ -5538,7 +5534,7 @@ object {
 
 .post-thumb {
   float: right;
-  width: 55%;
+  width: 54%;
 }
 
 .post-thumb a *:hover {
@@ -7757,12 +7753,14 @@ body.dark .post-list-thumb:hover {
 
 @media (max-width: 768px) {
   .post-content {
-    margin-top: 2%;
+    margin-top: 3.2%;
   }
 
   .float-content p {
     height: auto;
     display: block;
+    max-height: 75px;
+    overflow: hidden;
   }
 
   .post-list-thumb {
@@ -7780,7 +7778,7 @@ body.dark .post-list-thumb:hover {
   .post-list-thumb .post-content-wrap {
     text-align: left !important;
     margin: 0 !important;
-    padding: 6px 15px 20px 15px !important;
+    padding: 6px 14px 14px 14px !important;
     float: none !important;
     border-top: 0;
   }
@@ -7800,7 +7798,7 @@ body.dark .post-list-thumb:hover {
 
   .float-content {
     box-shadow: none;
-    padding: 1%;
+    padding: 8px 1% 0 1%;
     margin: 0;
   }
 
@@ -8590,7 +8588,7 @@ body.dark .post-list-thumb:hover {
   #mo-nav ul li {
     transition-duration: 0.25s;
     display: block;
-    padding: 10px 0px;
+    padding: 13px 0px;
     color: #fff;
     letter-spacing: 0.02em;
     text-align: center;
@@ -9559,7 +9557,8 @@ body.dark .post-list-thumb:hover {
   }
 
   .post-list-thumb .post-title h3 {
-    padding: 0 8px 0 8px;
+    padding: 0 2% 0 2%;
+    margin: 14px 0;
   }
 
   .post-meta {
@@ -10745,17 +10744,18 @@ em {
 
 input#wp-comment-cookies-consent,
 #mailpoet_subscribe_on_comment {
-	width: 17px;
-	height: 17px;
+  width: 17px;
+  height: 17px;
   color: #555;
-	box-sizing: border-box;
-	display: inline-block;
-	margin: 0 3px 0 0;
-	margin-bottom: -1px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0 3px 0 0;
+  margin-bottom: -1px;
 }
 
-.comment-form-mailpoet, .comment-form-cookies-consent {
-	font-size: 14px;
+.comment-form-mailpoet,
+.comment-form-cookies-consent {
+  font-size: 14px;
   color: #555;
-	line-height: 1;
+  line-height: 1;
 }

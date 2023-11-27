@@ -95,7 +95,7 @@ get_header();
         </div>
         <div id="add_post">
             <span id="add_post_time" style="visibility: hidden;"
-                title="<?php echo iro_opt('page_auto_load', ''); ?>"></span>
+                title="0"></span>
         </div>
     <?php } else { ?>
         <nav class="navigator">

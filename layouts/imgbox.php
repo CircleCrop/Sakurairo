@@ -20,7 +20,7 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
     foreach ($all_opt as $key => $value):
         if (!empty($value['link'])):
             // 显然 这里的逻辑可以看看all_opt的结构（
-            $img_url = $value['img'] ?? ($social_display_icon . ($value['icon'] ?? $key) . '.png');
+            $img_url = $value['img'] ?? ($social_display_icon . ($value['icon'] ?? $key) . '.svg');
             $title = $value['title'] ?? $key;
             ?>
             <li><a href="<?=$value['link'];?>" target="_blank" class="social-<?=$value['class'] ?? $key?>" title="<?=$title?>"><img alt="<?=$title?>" loading="lazy" src="<?=$img_url?>" /></a></li>
@@ -63,7 +63,6 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
             <?php endif; ?>
             <div class="header-container">
                 <div class="header-info">
-                    <!-- 首页一言打字效果 -->
                     <?php if (iro_opt('signature_typing', 'true')) : ?>
                     <?php if (iro_opt('signature_typing_marks', 'true')) : ?><i class="fa-solid fa-quote-left"></i><?php endif; ?>
                     <span class="element"><?=iro_opt('signature_typing_placeholder','疯狂造句中......')?></span>
@@ -72,14 +71,6 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
                     <script type="application/json" id="typed-js-initial">
                     <?= iro_opt('signature_typing_json', ''); ?>
                     </script>
-                    <!-- var typed = new Typed('.element', {
-                            strings: ["给时光以生命，给岁月以文明", ], //输入内容, 支持html标签
-                            typeSpeed: 140, //打字速度
-                            backSpeed: 50, //回退速度
-                            loop: false, //是否循环
-                            loopCount: Infinity,
-                            showCursor: true //是否开启光标
-                        }); -->
                     <?php endif; ?>
                     <p><?php echo iro_opt('signature_text', 'Hi, Mashiro?'); ?></p>
                     <?php if (iro_opt('infor_bar_style') === 'v2') : ?>
@@ -99,9 +90,8 @@ $print_social_zone = function() use ($all_opt,$social_display_icon):void{
     <?php } ?>
 </figure>
 <?php
-echo bgvideo(); //BGVideo 
+echo bgvideo(); 
 ?>
-<!-- 首页下拉箭头 -->
 <?php if (iro_opt('drop_down_arrow', 'true')) : ?>
 <div class="headertop-down" onclick="headertop_down()"><span><svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="80px" height="80px"><path d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z" fill="<?php echo iro_opt('drop_down_arrow_color'); ?>" p-id="21356"></path></svg></span></div>
 <?php endif; ?>

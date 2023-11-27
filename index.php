@@ -47,7 +47,7 @@ if (iro_opt('exhibition_area') == '1') {
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-		<h1 class="main-title"> <i class="<?php echo iro_opt('post_area_icon', 'fa-regular fa-bookmark'); ?>" aria-hidden="true"></i> <br> <?php echo iro_opt('post_area_title', '文章'); ?> </h1>
+		<h1 class="main-title"> <i class="<?php echo iro_opt('post_area_icon', 'fa-regular fa-bookmark'); ?>" aria-hidden="true"></i><?php echo iro_opt('post_area_title', '文章'); ?></h1>
 		<?php
 		if (have_posts()) :
 
@@ -72,7 +72,7 @@ if (iro_opt('exhibition_area') == '1') {
 	</main><!-- #main -->
 	<?php if (iro_opt('pagenav_style') == 'ajax') { ?>
 		<div id="pagination"><?php next_posts_link(__(' Previous', 'sakurairo')); ?></div>
-		<div id="add_post"><span id="add_post_time" style="visibility: hidden;" title="<?php echo iro_opt('page_auto_load', ''); ?>"></span></div>
+		<div id="add_post"><span id="add_post_time" style="visibility: hidden;" title="0"></span></div>
 	<?php } else { ?>
 		<nav class="navigator">
 			<?php previous_posts_link('<i class="fa-solid fa-angle-left"></i>') ?><?php next_posts_link('<i class="fa-solid fa-angle-right"></i>') ?>

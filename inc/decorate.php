@@ -872,10 +872,10 @@ li.link-item {
 <?php if(iro_opt('post_list_image_align') == 'left'){ ?>
 .post-list-thumb .post-content-wrap {
     float: left;
-    padding-left: 30px;
+    padding-left: 22px;
     padding-right: 0;
     text-align: right;
-    margin: 20px 10px 10px 0
+    margin: 26px 10px 10px 0
 }
 .post-list-thumb .post-thumb {
     float: left
@@ -888,13 +888,19 @@ li.link-item {
 <?php }else if(iro_opt('post_list_image_align') == 'alternate'){ ?>
 .post-list-thumb:nth-child(2n) .post-content-wrap {
     float: left;
-    padding-left: 30px;
+    padding-left: 22px;
     padding-right: 0;
     text-align: right;
-    margin: 20px 10px 10px 0
+    margin: 26px 10px 10px 0
 }
 .post-list-thumb:nth-child(2n) .post-thumb {
     float: left
+}
+@media (min-width: 860px) {
+    .post-list-thumb:nth-child(2n) .post-date {
+        margin-right: 0;
+        margin-left: auto;
+    }
 }
 
 .post-list-thumb:nth-child(2n) .post-thumb a {

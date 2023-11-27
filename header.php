@@ -15,16 +15,6 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 ?>
 <?php header('X-Frame-Options: SAMEORIGIN'); ?>
 <!DOCTYPE html>
-<!-- 
-            ◢＼　 ☆　　 ／◣
-    　  　∕　　﹨　╰╮∕　　﹨
-    　  　▏　　～～′′～～ 　｜
-    　　  ﹨／　　　　　　 　＼∕
-    　 　 ∕ 　　●　　　 ●　＼
-      ＝＝　○　∴·╰╯　∴　○　＝＝
-    　    ╭──╮　　　　　╭──╮
-  ╔═ ∪∪∪═Mashiro&Hitomi═∪∪∪═╗
--->
 <html <?php language_attributes(); ?>>
 
 <head>
