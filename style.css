@@ -2361,7 +2361,6 @@ h1.main-title {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 0px;
-  margin-bottom: 30px;
   text-underline-offset: 10px;
   text-decoration: underline wavy var(--post_list_matching_color, #ffeeeb);
   transition: all 0.8s ease !important;
