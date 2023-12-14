@@ -32,13 +32,9 @@ $reception_background = iro_opt('reception_background');
 						<p id="footer_yiyan"></p>
 						<?php } ?>
 					<span style="color: #b9b9b9;">
-						<?php /* 能保留下面两个链接吗？算是我一个小小的心愿吧~ */ ?>
 						<?php if (iro_opt('footer_load_occupancy', 'true')): ?>
-                        <?php printf(
-                            _x( 'Load Time %.3f seconds | %d Query | RAM Usage %.2f MB ', 'footer load occupancy', 'sakurairo' ),
-                            timer_stop( 0, 3 ),get_num_queries(),memory_get_peak_usage() / 1024 / 1024);
-                        ?>
-                        <?php endif; ?>
+                        <a href="" target="_blank">萌ICP备预留位</a>
+                        <?php endif; ?>
 						<?php if (iro_opt('footer_upyun', 'true')): ?>
 							本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"> <img alt="upyun-logo" src="https://s.nmxc.ltd/sakurairo_vision/@2.6/options/upyun_logo.webp"  style="display:inline-block;vertical-align:middle;width:60px;height:30px;"/> 提供 CDN 加速 / 云存储 服务
                         <?php endif; ?>
@@ -170,11 +166,6 @@ $reception_background = iro_opt('reception_background');
         data-volume="<?php echo iro_opt('aplayer_volume', ''); ?>"
         data-theme="<?php echo iro_opt('theme_skin'); ?>">
     </div>
-<?php endif; ?>
-
-<!-- 首页波浪特效 -->
-<?php if (iro_opt('wave_effects', 'true')): ?>
-<link rel="stylesheet" href="<?php global $shared_lib_basepath;echo $shared_lib_basepath?>/css/wave.css">
 <?php endif; ?>
 
 <?php

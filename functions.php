@@ -10,6 +10,20 @@ ini_set('display_errors',0);
 define('IRO_VERSION', wp_get_theme()->get('Version'));
 define('INT_VERSION', '18.2.0');
 define('BUILD_VERSION', '2');
+
+function remove_comments_from_output( $buffer ) {
+  $buffer = preg_replace( '/<!--.*?-->/s', '', $buffer );
+  return $buffer;
+}
+function start_output_buffer() {
+    ob_start( "remove_comments_from_output" );
+}
+function end_output_buffer() {
+    ob_end_flush();
+}
+add_action( 'wp_head', 'start_output_buffer', -1 );
+add_action( 'wp_footer', 'end_output_buffer', -1 );
+
 function allow_custom_upload_mimes( $mimes ) {
     $mimes['svg'] = 'image/svg+xml';
     $mimes['ico'] = 'image/x-icon';
@@ -24,6 +38,15 @@ add_filter( 'wp_editor_set_quality', function( $quality, $mime_type ) {
     }
     return $quality;
 }, 10, 2 );
+
+function rename_filename($filename) {
+	$info = pathinfo($filename);
+	$ext = empty($info['extension']) ? '' : '.' . $info['extension'];
+	$name = basename($filename, $ext);
+	return substr(md5($name), 0, 20) . $ext;
+}
+add_filter('sanitize_file_name', 'rename_filename');
+
 //add_filter( 'jpeg_quality', '96', 1);
 // Remove certain image sizes or...
 function remove_some_image_sizes() {
