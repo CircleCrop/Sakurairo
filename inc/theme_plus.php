@@ -416,7 +416,7 @@ function header_user_menu()
     $ava = iro_opt('personal_avatar') ? iro_opt('personal_avatar') : get_avatar_url($current_user->user_email);
   ?>
     <div class="header-user-avatar">
-      <img src="<?php echo get_avatar_url($current_user->ID, 64);/*$ava;*/ ?>" width="30" height="30">
+      <img alt="header_user_avatar" src="<?php echo get_avatar_url($current_user->ID, 64);/*$ava;*/ ?>" width="30" height="30">
       <div class="header-user-menu">
         <div class="header-user-name">
           <?php _e("Signed in as", "sakurairo") ?>
@@ -440,6 +440,16 @@ function header_user_menu()
     //可以测试一下对不同的固定链接的兼容性
     $login_url = iro_opt('exlogin_url') ? iro_opt('exlogin_url') : wp_login_url(iro_opt('login_urlskip') ? '' : add_query_arg($wp->query_vars, home_url($wp->request)));
   ?>
+    <div class="header-user-avatar">
+      <a href="<?= $login_url ?>">
+        <img alt="header_user_avatar" src="<?= $ava ?>" width="30" height="30">
+      </a>
+      <div class="header-user-menu">
+        <div class="header-user-name no-logged">
+          <a id="login-link" href="<?= $login_url ?>" data-no-pjax style="font-weight:bold;text-decoration:none"><?php _e('Log in', 'sakurairo')/*登录*/ ?></a>
+        </div>
+      </div>
+    </div>
   <?php
   }
 }
@@ -826,8 +836,7 @@ function siren_get_useragent(string $ua):string{
     $imgurl = iro_opt('vision_resource_basepath').'ua/';
     $browser = siren_get_browsers($ua);
     $os = siren_get_os($ua);
-    return '&nbsp;&nbsp;<span class="useragent-info">( <img src="'. $imgurl.$browser['icon'] .'.svg">&nbsp;'. $browser['title'] .'&nbsp;&nbsp;<img src="'. $imgurl.$os['icon'] .'.svg">&nbsp;'. $os['title'] .' )</span>';
-  }
+    return '&nbsp;&nbsp;<span class="useragent-info">( <img alt="browser_icon" src="'. $imgurl.$browser['icon'] .'.svg">&nbsp;'. $browser['title'] .'&nbsp;&nbsp;<img alt="os_icon" src="'. $imgurl.$os['icon'] .'.svg">&nbsp;'. $os['title'] .' )</span>';  }
   return '';
 }
 
@@ -837,7 +846,7 @@ function mobile_get_useragent_icon(string $ua):string{
     $imgurl = iro_opt('vision_resource_basepath').'ua/';
     $browser = siren_get_browsers($ua);
     $os = siren_get_os($ua);
-    return '<span class="useragent-info-m">( <img src="'. $imgurl.$browser['icon'] .'.svg">&nbsp;&nbsp;<img src="'. $imgurl.$os['icon'] .'.svg"> )</span>';
+    return '<span class="useragent-info-m">( <img alt="browser_icon" src="'. $imgurl.$browser['icon'] .'.svg">&nbsp;&nbsp;<img alt="os_icon" src="'. $imgurl.$os['icon'] .'.svg"> )</span>';
   }
   return '';
 }
@@ -849,8 +858,8 @@ function mobile_get_useragent_icon(string $ua):string{
   $alipay = iro_opt('alipay_code');
   $wechat = iro_opt('wechat_code');
   if($alipay || $wechat){
-  $alipay =  $alipay ? '<li class="alipay-code"><img src="'.$alipay.'"></li>' : '';
-  $wechat = $wechat ? '<li class="wechat-code"><img src="'.$wechat.'"></li>' : '';
+  $alipay =  $alipay ? '<li class="alipay-code"><img alt="alipay_img" src="'.$alipay.'"></li>' : '';
+  $wechat = $wechat ? '<li class="wechat-code"><img alt="wechat_img" src="'.$wechat.'"></li>' : '';
   ?>
     <div class="reward-open"> <i class="fa-solid fa-piggy-bank fa-sm"></i>
       <div class="reward-main">
