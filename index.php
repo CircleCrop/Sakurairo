@@ -47,15 +47,13 @@ if (iro_opt('exhibition_area') == '1') {
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-		<h1 class="main-title"> <i class="<?php echo iro_opt('post_area_icon', 'fa-regular fa-bookmark'); ?>" aria-hidden="true"></i><?php echo iro_opt('post_area_title', '文章'); ?></h1>
+		<h1 class="main-title"></h1>
 		<?php
 		if (have_posts()) :
-
 			if (is_home() && !is_front_page()) : ?>
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
-
 			<?php
 			endif;
 			/* Start the Loop */

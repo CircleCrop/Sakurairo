@@ -24,20 +24,43 @@ function end_output_buffer() {
 add_action( 'wp_head', 'start_output_buffer', -1 );
 add_action( 'wp_footer', 'end_output_buffer', -1 );
 
+
+$shared_lib_basepath = 'https://cdn.aiccrop.com/Sakurairo';
+$core_lib_basepath = 'https://cdn.aiccrop.com/Sakurairo';
+function replace_wp_includes_cdn($src) {
+    if (strpos($src, '/wp-includes/js/') !== false) {
+        return str_replace(site_url(), 'https://cdn.aiccrop.com', $src);
+    } elseif (strpos($src, '/wp-includes/css/') !== false) {
+        return str_replace(site_url(), 'https://cdn.aiccrop.com', $src);
+    }
+    return $src;
+}
+add_filter('script_loader_src', 'replace_wp_includes_cdn', 10);
+add_filter('style_loader_src', 'replace_wp_includes_cdn', 10);
+
+function replace_jquery_cdn() {
+    wp_deregister_script('jquery');
+    wp_deregister_script('jquery-migrate');
+
+    global $wp_scripts;
+    $jquery_version = isset($wp_scripts->registered['jquery']->ver) ? $wp_scripts->registered['jquery']->ver : '3.7.1';
+    $jquery_migrate_version = isset($wp_scripts->registered['jquery-migrate']->ver) ? $wp_scripts->registered['jquery-migrate']->ver : '3.4.1';
+
+    wp_register_script('jquery', 'https://cdn.bootcdn.net/ajax/libs/jquery/'.$jquery_version.'/jquery.min.js', false);
+    wp_register_script('jquery-migrate', 'https://cdn.bootcdn.net/ajax/libs/jquery-migrate/'.$jquery_migrate_version.'/jquery-migrate.min.js', array('jquery'));
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery-migrate');
+}
+add_action('wp_enqueue_scripts', 'replace_jquery_cdn', 9);
+
 function allow_custom_upload_mimes( $mimes ) {
     $mimes['svg'] = 'image/svg+xml';
     $mimes['ico'] = 'image/x-icon';
-    $mimes['cur'] = 'image/x-icon';
+	$mimes['txt'] = 'text/plain';
     return $mimes;
 }
 add_filter( 'upload_mimes', 'allow_custom_upload_mimes' );
-add_filter('big_image_size_threshold', '__return_false', 1);
-add_filter( 'wp_editor_set_quality', function( $quality, $mime_type ) {
-    if ( $mime_type === 'image/webp' ) {
-        return 85;
-    }
-    return $quality;
-}, 10, 2 );
+add_filter( 'big_image_size_threshold', '__return_false', 1);
 
 function rename_filename($filename) {
 	$info = pathinfo($filename);
@@ -47,7 +70,6 @@ function rename_filename($filename) {
 }
 add_filter('sanitize_file_name', 'rename_filename');
 
-//add_filter( 'jpeg_quality', '96', 1);
 // Remove certain image sizes or...
 function remove_some_image_sizes() {
     foreach ( get_intermediate_image_sizes() as $size ) {
@@ -104,7 +126,7 @@ if (!function_exists('iro_opt')) {
 if (!function_exists('iro_opt_update')) {
     function iro_opt_update($option = '', $value = null)
     {
-        $options = get_option('iro_options'); // 当数据库没有指定项时，WordPress会返回false
+        $options = get_option('iro_options'); // 当数据库没有指定项时，WordPress 会返回 false
         if($options){
             $options[$option] = $value;
         }else{
@@ -113,8 +135,6 @@ if (!function_exists('iro_opt_update')) {
         update_option('iro_options', $options);
     }
 }
-$shared_lib_basepath = iro_opt('shared_library_basepath') ? get_template_directory_uri() : (iro_opt('lib_cdn_path','https://fastly.jsdelivr.net/gh/mirai-mamori/Sakurairo@'). IRO_VERSION);
-$core_lib_basepath =  iro_opt('core_library_basepath') ? get_template_directory_uri() : (iro_opt('lib_cdn_path','https://fastly.jsdelivr.net/gh/mirai-mamori/Sakurairo@'). IRO_VERSION);
 
 /**
  * composer autoload
@@ -1105,7 +1125,7 @@ add_filter('comment_text', 'comment_picture_support');
 // 贴吧
 
 /**
- * 通过文件夹获取自定义表情列表，使用Transients来存储获得的列表，除非手动清除，数据永不过期。
+ * 通过文件夹获取自定义表情列表，使用 Transients 来存储获得的列表，除非手动清除，数据永不过期。
  * 数据格式如下：
  * Array
  * (
@@ -1659,8 +1679,6 @@ function theme_admin_notice_callback() {
             var xhr = new XMLHttpRequest();
             xhr.open( "POST", "<?php echo admin_url( 'admin-ajax.php' ); ?>", true );
             xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
-            xhr.send( "action=update_theme_option&option=send_theme_version&value=true" );
-
             // 写入 1 到 meta
             var data = new FormData();
             data.append( 'action', 'update_theme_admin_notice_meta' );
@@ -2149,33 +2167,6 @@ function permalink_tip()
 }
 add_action('admin_notices', 'permalink_tip');
 //code end
-
-//发送主题版本号 
-function send_theme_version() {
-    $theme = wp_get_theme();
-    $version = $theme->get('Version');
-    $data = array(
-        'date' => date('Y-m-d H:i:s'),
-        'version' => $version
-    );
-    $args = array(
-        'body' => $data,
-        'timeout' => '5',
-        'redirection' => '5',
-        'httpversion' => '1.0',
-        'blocking' => true,
-        'headers' => array(),
-        'cookies' => array()
-    );
-    wp_remote_post('https://api.maho.cc/ver-stat/index.php', $args);
-}
-
-if (iro_opt('send_theme_version') == '1') {
-if (!wp_next_scheduled('daily_event')) {
-    wp_schedule_event(time(), 'daily', 'daily_event');
-}
-add_action('daily_event', 'send_theme_version');
-}
 
 //解析短代码  
 add_shortcode('task', 'task_shortcode');

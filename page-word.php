@@ -105,7 +105,7 @@ get_header();
     <?php } ?>
 </div><!-- #primary -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6013103294751614"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>   
 <script>
     function executeAdsByGoogle() {
         (adsbygoogle = window.adsbygoogle || []).push({});
