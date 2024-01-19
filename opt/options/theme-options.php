@@ -1955,7 +1955,7 @@ if (class_exists('Sakurairo_CSF')) {
       array(
         'id' => 'youku',
         'type' => 'text',
-        'title' => __('Youku', 'sakurairo_csf'),
+        'title' => __('Youtube', 'sakurairo_csf'),
         'dependency' => array('social_area', '==', 'true', '', 'true'),
         'desc' => __('add URL', 'sakurairo_csf'),
       ),

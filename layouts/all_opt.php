@@ -4,7 +4,7 @@ $all_opt = [
     'bili' => [
         'link' => iro_opt('bili', ''),
         'icon' => 'bilibili',
-        'title' => 'bilibili',
+        'title' => '哔哩哔哩',
     ],
     'qq' => [
         'link' => iro_opt('qq', '')
@@ -16,7 +16,7 @@ $all_opt = [
     ],
     'sina' => [
         'link' => iro_opt('sina', ''),
-        'title' => 'weibo',
+        'title' => '微博',
         'icon' => 'weibo'
     ],
     'github' => [
@@ -43,7 +43,7 @@ $all_opt = [
     'lofter' => [
         'link' => iro_opt('lofter', '')
     ],
-    'youku' => [
+    'Youtube' => [
         'link' => iro_opt('youku', '')
     ],
     'linkedin' => [

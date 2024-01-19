@@ -2145,7 +2145,7 @@ msgid "Lofter"
 msgstr ""
 
 #: options/theme-options.php:1947
-msgid "Youku"
+msgid "Youtube"
 msgstr ""
 
 #: options/theme-options.php:1955

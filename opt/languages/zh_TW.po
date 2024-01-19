@@ -2208,8 +2208,8 @@ msgid "Lofter"
 msgstr "乐乎"
 
 #: options/theme-options.php:1947
-msgid "Youku"
-msgstr "優酷"
+msgid "Youtube"
+msgstr "Youtube"
 
 #: options/theme-options.php:1955
 msgid "Linkedin"
