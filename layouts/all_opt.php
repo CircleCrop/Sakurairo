@@ -43,9 +43,6 @@ $all_opt = [
     'lofter' => [
         'link' => iro_opt('lofter', '')
     ],
-    'Youtube' => [
-        'link' => iro_opt('youku', '')
-    ],
     'linkedin' => [
         'link' => iro_opt('linkedin', ''),
         'icon' => 'lk',
@@ -82,5 +79,8 @@ $all_opt = [
         'title' => iro_opt('socialdiy2_title', 'DIY2'),
         'img' => iro_opt('socialdiyp2'),
         'class' => 'wangyiyun',
+    ],
+    'Youtube' => [
+        'link' => iro_opt('youku', '')
     ],
 ];

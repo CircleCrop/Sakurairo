@@ -6,7 +6,7 @@ Theme URI: https://github.com/CircleCrop/Sakurairo
 Author: Fuukei
 Author URI: https://fuukei.org/
 Description: Based on Theme Sakura
-Version: 2024.1.8
+Version: 24.1.8
 Tested up to: 6.4
 Requires at least: 5.8
 Requires PHP: 7.2
@@ -8387,10 +8387,6 @@ body.theme-dark .cbp_tmtimeline::before {
   .wrapper section h2 {
     font-weight: 300;
     font-size: 20px;
-    margin-bottom: 40px;
-  }
-
-  .wrapper section p {
     margin-bottom: 40px;
   }
 

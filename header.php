@@ -2,11 +2,8 @@
 
 /**
  * The header for our theme.
- *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
  * @package Akina
  */
 
@@ -20,39 +17,17 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 <head>
 	<meta name="theme-color">
 	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0" name="viewport">
 	<?php
-	if (iro_opt('iro_meta') == true) {
-		$keywords = '';
-		$description = '';
-		if (is_singular()) {
-			$keywords = '';
-			$tags = get_the_tags();
-			$categories = get_the_category();
-			if ($tags) {
-				foreach ($tags as $tag) {
-					$keywords .= $tag->name . ',';
-				};
-			}
-			;
-			if ($categories) {
-				foreach ($categories as $category) {
-					$keywords .= $category->name . ',';
-				};
-			};
-			$description = mb_strimwidth(str_replace("\r\n", '', strip_tags($post->post_content)), 0, 240, '…');
-		} else {
-			$keywords = iro_opt('iro_meta_keywords');
-			$description = iro_opt('iro_meta_description');
-		}; ?>
-		<meta name="description" content="<?php echo $description; ?>" />
-		<meta name="keywords" content="<?php echo $keywords; ?>" />
-	<?php } ?>
+	$keywords = iro_opt('iro_meta_keywords');
+	$description = iro_opt('iro_meta_description');?>
+	<meta name="description" content="<?php echo $description; ?>" />
+	<meta name="keywords" content="<?php echo $keywords; ?>" />
 	<link rel="shortcut icon" href="<?php echo iro_opt('favicon_link', ''); ?>" />
 	<meta http-equiv="x-dns-prefetch-control" content="on">
 	<?php if (is_home()) {
 		//预载资源
-		//id 需要一致，使 pjax 可以完成自动替换
+		//id 一致，pjax 自动替换
 		global $core_lib_basepath; ?>
 		<link id="entry-content-css" rel="prefetch" as="style"
 			href="<?= $core_lib_basepath . '/css/theme/' . (iro_opt('entry_content_style') == 'sakurairo' ? 'sakura' : 'github') . '.css?ver=' . IRO_VERSION ?>" />
@@ -60,21 +35,16 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 		<?php } ?>
 		<link rel="preload" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<?php wp_head(); ?>
-	<script type="text/javascript">
-		if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
-			alert('本站不支持 IE 浏览器');
-		}
-	</script>
+	<script type="text/javascript">if (!!window.ActiveXObject || "ActiveXObject" in window) {alert('本站不支持 IE 浏览器');}</script>
 	<?php if (iro_opt('google_analytics_id', '')): ?>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async
-			src="https://www.googletagmanager.com/gtag/js?id=<?php echo iro_opt('google_analytics_id', ''); ?>"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() { dataLayer.push(arguments) }
-			gtag('js', new Date());
-			gtag('config', '<?php echo iro_opt('google_analytics_id', ''); ?>');
-		</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo iro_opt('google_analytics_id', ''); ?>"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments) }
+		gtag('js', new Date());
+		gtag('config', '<?php echo iro_opt('google_analytics_id', ''); ?>');
+	</script>
 	<?php endif; ?>
 	<?php echo iro_opt("site_header_insert"); ?>
 </head>
@@ -92,7 +62,7 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 			<div class="site-branding">
 				<?php if (iro_opt('iro_logo') && !iro_opt('mashiro_logo_option', false)) { ?>
 					<div class="site-title">
-						<a href="<?php bloginfo('url'); ?>"><img src="<?php echo iro_opt('iro_logo'); ?>"></a>
+						<a href="<?php bloginfo('url'); ?>"><img src="<?php echo iro_opt('iro_logo'); ?>" alt="site-logo"></a>
 					</div>
 				<?php } else { ?>
 					<span class="site-title">
