@@ -12,10 +12,12 @@ $print_social_zone = function () use ($all_opt, $social_display_icon): void {
         <li class="wechat"><a href="#" title="WeChat"><img loading="lazy" src="<?= $social_display_icon ?>wechat.png" /></a>
             <div class="wechatInner">
                 <img class="wechat-img" style="height: max-content;width: max-content;" loading="lazy" src="<?= iro_opt('wechat', '') ?>" alt="WeChat">
+                <img class="wechat-img" style="height: max-content;width: max-content;" loading="lazy" src="<?= iro_opt('wechat', '') ?>" alt="WeChat">
             </div>
         </li>
         <?php
     endif;
+
     // 大体(all_opt.php)
     foreach ($all_opt as $key => $value):
         if (!empty($value['link'])):
@@ -27,6 +29,7 @@ $print_social_zone = function () use ($all_opt, $social_display_icon): void {
             <?php
         endif;
     endforeach;
+
     // 邮箱
     if (iro_opt('email_name') && iro_opt('email_domain')): ?>
         <li><a onclick="mail_me()" class="social-wangyiyun" title="E-mail"><img loading="lazy" alt="E-mail" src="<?= iro_opt('vision_resource_basepath') ?><?= iro_opt('social_display_icon') ?>/mail.png" /></a></li>
@@ -83,6 +86,7 @@ $print_social_zone = function () use ($all_opt, $social_display_icon): void {
                     <?php $print_social_zone(); ?>
                 </div>
             <?php endif; ?>
+
         </div>
     <?php } ?>
 </figure>
