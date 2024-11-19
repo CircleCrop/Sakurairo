@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Sakurairo
+ * @package Akina
  */
 
 get_header(); ?>

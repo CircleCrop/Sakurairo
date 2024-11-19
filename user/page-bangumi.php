@@ -38,7 +38,6 @@ get_header();
                         $bgm = new \Sakura\API\MyAnimeList();
                         echo $bgm->get_all_items();
                         ?>
-                        </div>
                     <?php else: ?>
                         <div class="row">
                             <p> <?php _e("Please fill in the My Anime List Username in Sakura Options.","sakurairo"); ?></p>

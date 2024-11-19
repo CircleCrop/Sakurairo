@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Update Checker Library 5.5
+ * Plugin Update Checker Library 5.1
  * http://w-shadow.com/
  *
- * Copyright 2024 Janis Elsts
+ * Copyright 2023 Janis Elsts
  * Released under the MIT license. See license.txt for details.
  */
 

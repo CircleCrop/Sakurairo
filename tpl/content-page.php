@@ -4,29 +4,26 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Sakurairo
+ * @package Akina
  */
 
 ?>
 
-<article id="post-<?php echo esc_attr(get_the_ID()); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php 
-	if (should_show_title()) { ?>
+	if(should_show_title()) { ?>
 	<header class="entry-header">
-		<?php 
-		$title_style = get_post_meta(get_the_ID(), 'title_style', true);
-		echo '<h1 class="entry-title" style="' . esc_attr($title_style) . '">' . esc_html(get_the_title()) . '</h1>'; 
-		?>
+		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 	<?php } ?>
-	<?php get_template_part('layouts/sidebox'); ?>
+    <?php get_template_part('layouts/sidebox'); ?>
 	<div class="entry-content">
 		<?php
-			the_content('', true);
-			wp_link_pages([
-				'before' => '<div class="page-links">' . esc_html__('Pages:', 'sakurairo'),
+			the_content( '', true );
+			wp_link_pages( array(
+				'before' => '<div class="page-links">' . __( 'Pages:', 'sakurairo' ),
 				'after'  => '</div>',
-			]);
+			) );
 		?>
 	</div><!-- .entry-content -->
 
@@ -35,8 +32,8 @@
 			edit_post_link(
 				sprintf(
 					/* translators: %s: Name of current post */
-					esc_html__('Edit %s', 'sakurairo'),
-					'<span class="screen-reader-text">' . esc_html(get_the_title()) . '</span>'
+					__( 'Edit %s', 'sakurairo' ),
+					the_title( '<span class="screen-reader-text">"', '"</span>', false )
 				),
 				'<span class="edit-link">',
 				'</span>'

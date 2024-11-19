@@ -4,26 +4,16 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Sakurairo
+ * @package Akina
  */
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php 
-		$title_style = get_post_meta(get_the_ID(), 'title_style', true);
-		the_title(
-			sprintf(
-				'<h2 class="entry-title" style="%s"><a href="%s" rel="bookmark">', 
-				esc_attr($title_style),
-				esc_url(get_permalink())
-			), 
-			'</a></h2>'
-		); 
-		?>
+		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-		<?php if ('post' === get_post_type()) : ?>
+		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php akina_posted_on(); ?>
 		</div><!-- .entry-meta -->

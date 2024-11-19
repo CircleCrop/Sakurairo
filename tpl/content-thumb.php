@@ -1,78 +1,124 @@
 <?php
-
 /**
- * Template part for displaying posts and shuoshuo.
+ * Template part for displaying posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Sakurairo
+ * @package Akina
  */
+//function custom_short_excerpt($excerpt){
+//	return substr($excerpt, 0, 120);
+//}
+//add_filter('the_excerpt', 'custom_short_excerpt');
+$i = 0;
+while (have_posts()) : the_post();
+	$i++;
+	if ($i == 1) {
+		$class = ' post-list-show';
+	}
+	//封面视频
+	//@seealso https://github.com/mashirozx/Sakura/wiki/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E8%A7%86%E9%A2%91
+	$use_as_thumb = get_post_meta(get_the_ID(), 'use_as_thumb', true); //'true','only',(default)
+	$cover_type = ($use_as_thumb == 'true' || $use_as_thumb == 'only') ? get_post_meta(get_the_ID(), 'cover_type', true) : '';
+	$cover_html = "";
+	switch ($cover_type) {
+		case 'hls':
+			$video_cover = get_post_meta(get_the_ID(), 'video_cover', true);
+			$cover_html = '<video class="hls" poster="' . iro_opt('load_out_svg') . '#lazyload-blur" src="' .  $video_cover . '" loop muted="true" disablePictureInPicture disableRemotePlayback playsinline>'
+				. __('Your browser does not support HTML5 video.', 'sakurairo')
+				. '</video>';
+			break;
+		case 'normal':
+			$video_cover = get_post_meta(get_the_ID(), 'video_cover', true);
+			$cover_html = '<video class="lazyload" poster="' . iro_opt('load_out_svg') . '#lazyload-blur" data-src="' .  $video_cover . '" autoplay loop muted="true" disablePictureInPicture disableRemotePlayback playsinline>'
+				. __('Your browser does not support HTML5 video.', 'sakurairo')
+				. '</video>';
+			break;
+		default:
+			$post_img = '';
+			if (has_post_thumbnail()) {
+				$post_thumbnail_id = get_post_thumbnail_id($post->ID);
+				$large_image_url = wp_get_attachment_image_src($post_thumbnail_id, 'large');
+				if ($large_image_url == false) {
+					$large_image_url = wp_get_attachment_image_src($post_thumbnail_id, 'medium');
+					if ($large_image_url == false) {
+						$large_image_url = wp_get_attachment_image_src($post_thumbnail_id);
+						if ($large_image_url == false) {
+							$post_img = DEFAULT_FEATURE_IMAGE();
+						}
+					}
+				}
+				$post_img = $large_image_url[0] ?? DEFAULT_FEATURE_IMAGE('th');
+			} else {
+				$post_img = DEFAULT_FEATURE_IMAGE('th');
+			}
+			$cover_html = '<img alt="post_img" class="lazyload" src="' . iro_opt('load_out_svg') . '#lazyload-blur" data-src="' . $post_img . '"/>';
+			break;
+	}
 
-// Combine posts and shuoshuo
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
-// Determine if we are on an author page
-$is_author_page = is_author() && !is_home() && !is_category() && !is_tag();
-
-$sticky_posts = get_option('sticky_posts');
-
-$show_shuoshuo_on_home_page = iro_opt('show_shuoshuo_on_home_page');
-
-// Query for sticky posts (only on the first page)
-if ($paged == 1 && !empty($sticky_posts)) {
-    $sticky_args = array(
-        'post_type' => array('post', 'shuoshuo'),
-        'post_status' => 'publish',
-        'posts_per_page' => -1, // Get all sticky posts
-        'post__in' => $sticky_posts,
-        'orderby' => 'post_date',
-        'order' => 'DESC',
-    );
-
-    if (is_home() && !$show_shuoshuo_on_home_page) {
-        $all_results_args['post_type'] = array('post');
-    }
-	
-    if ($is_author_page) {
-        $sticky_args['author'] = get_the_author_meta('ID');
-    }
-
-    $sticky_query = new WP_Query($sticky_args);
-
-    // Display sticky posts
-    if ($sticky_query->have_posts()) :
-        while ($sticky_query->have_posts()) : $sticky_query->the_post();
-            get_template_part('tpl/content', 'thumbcard');
-        endwhile;
-    endif;
-}
-
-// Query for non-sticky posts
-$non_sticky_args = array(
-    'post_type' => array('post', 'shuoshuo'),
-    'post_status' => 'publish',
-    'posts_per_page' => 10, // 每页显示10篇文章
-    'orderby' => 'post_date',
-    'order' => 'DESC',
-    'paged' => $paged,
-    'post__not_in' => $sticky_posts,
-    'ignore_sticky_posts' => 1
-);
-
-if (is_home() && !$show_shuoshuo_on_home_page) {
-    $all_results_args['post_type'] = array('post');
-}
-
-if ($is_author_page) {
-    $non_sticky_args['author'] = get_the_author_meta('ID'); // 只获取当前作者的文章
-}
-
-$non_sticky_query = new WP_Query($non_sticky_args);
-
-// Display non-sticky posts
-if ($non_sticky_query->have_posts()) :
-    while ($non_sticky_query->have_posts()) : $non_sticky_query->the_post();
-        get_template_part('tpl/content', 'thumbcard');
-    endwhile;
-endif;
+	$the_cat = get_the_category();
+	// 摘要字数限制
+	$ai_excerpt = get_post_meta($post->ID, POST_METADATA_KEY, true); 
+	$excerpt = has_excerpt(); 
+	//add_filter( 'excerpt_length', 'custom_excerpt_length', 120 );
 ?>
+	<article class="post post-list-thumb <?php echo $class; ?>" itemscope="" itemtype="http://schema.org/BlogPosting">
+		<div class="post-thumb">
+			<a href="<?php the_permalink(); ?>">
+				<?php echo $cover_html; ?>
+			</a>
+		</div><!-- thumbnail-->
+		<div class="post-content-wrap">
+			<div class="post-content">
+				<div class="post-date">
+					<i class="fa-regular fa-clock"></i><?php echo poi_time_since(strtotime($post->post_date)); ?>
+					<?php if (is_sticky()) : ?>
+						&nbsp;<i class="fa-regular fa-gem"></i>
+					<?php endif ?>
+				</div>
+				<a href="<?php the_permalink(); ?>" class="post-title">
+					<h3><?php the_title(); ?></h3>
+				</a>
+				<div class="post-meta">
+					<?php
+					if (iro_opt("is_author_meta_show")) {
+						if (!function_exists('get_author_meta_spans')) {
+							require get_stylesheet_directory() . '/tpl/meta-author.php';
+						}
+						get_author_meta_spans();
+					}
+					?>
+					<span><i class="fa-regular fa-eye"></i><?php echo get_post_views(get_the_ID()) . ' ' . _n('Hit', 'Hits', get_post_views(get_the_ID()), 'sakurairo')/*热度*/ ?></span>
+					<span class="comments-number">
+						<i class="fa-regular fa-comment"></i>
+						<?php comments_popup_link(__("NOTHING", "sakurairo"), __("1 Comment", "sakurairo")/*条评论*/, '% ' . __("Comments", "sakurairo")/*条评论*/, '', __("Comment Closed", "sakurairo")
+							/**评论关闭 */
+						); ?>
+					</span>
+					<span><i class="fa-regular fa-folder"></i>
+					<a href="<?php
+						if (isset($the_cat[0])) {
+							echo $cat_id = esc_url(get_category_link($the_cat[0]->cat_ID  ?? ''));
+						}
+					?>">
+					<?php
+						if (isset($the_cat[0])) {
+							echo $the_cat[0]->cat_name ?? '未分类';
+						} else {
+							echo '未分类';
+						}
+					?>
+					</a>
+					</span>
+				</div>
+				<div class="float-content">
+				<?php if(!empty($ai_excerpt) && empty($excerpt)) { ?>
+				<div class="ai-excerpt-tip"><i class="fa-regular fa-lightbulb"></i><?php _e("AI Excerpt", "sakurairo") ?></div>
+				<?php } ?>
+				<?php the_excerpt() ?>
+				</div>
+			</div>
+		</div>
+	</article>
+<?php
+endwhile;

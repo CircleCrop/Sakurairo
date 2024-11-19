@@ -163,12 +163,7 @@ if ( !class_exists(StateStore::class, false) ):
 
 			$state = get_site_option($this->optionName, null);
 
-			if (
-				!is_object($state)
-				//Sanity check: If the Utils class is missing, the plugin is probably in the process
-				//of being deleted (e.g. the old version gets deleted during an update).
-				|| !class_exists(Utils::class)
-			) {
+			if ( !is_object($state) ) {
 				$this->lastCheck = 0;
 				$this->checkedVersion = '';
 				$this->update = null;

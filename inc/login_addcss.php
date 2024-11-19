@@ -29,8 +29,8 @@
 
 <?php if (iro_opt('login_blur', 'true')): ?>
 body::before{
-	-webkit-backdrop-filter: saturate(180%) blur(10px);
-	backdrop-filter: saturate(180%) blur(10px);
+	-webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
 	content:"";
 	width:100vw;
 	height:100vh;
@@ -38,7 +38,4 @@ body::before{
 }
 <?php endif; ?>
 
-.cf-turnstile-wrap {
-    text-align: center;
-}
 </style>

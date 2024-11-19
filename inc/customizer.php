@@ -2,7 +2,7 @@
 /**
  * Akina Theme Customizer.
  *
- * @package Sakurairo
+ * @package Akina
  */
 
 /**
