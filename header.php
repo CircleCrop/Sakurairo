@@ -1,55 +1,48 @@
 <?php
-
-/**
- * The header for our theme.
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- * @package Akina
- */
-
-$mashiro_logo = iro_opt('mashiro_logo');
-$vision_resource_basepath = iro_opt('vision_resource_basepath');
+$mashiro_logo = iro_opt( 'mashiro_logo' );
+$vision_resource_basepath = iro_opt( 'vision_resource_basepath' );
 ?>
-<?php header('X-Frame-Options: SAMEORIGIN'); ?>
+<?php header( 'X-Frame-Options: SAMEORIGIN' ); ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
 	<meta name="theme-color">
-	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0" name="viewport">
-	<?php
-	$keywords = iro_opt('iro_meta_keywords');
-	$description = iro_opt('iro_meta_description');?>
 	<meta name="description" content="<?php echo $description; ?>" />
 	<meta name="keywords" content="<?php echo $keywords; ?>" />
-	<link rel="shortcut icon" href="<?php echo iro_opt('favicon_link', ''); ?>" />
+	<link rel="shortcut icon" href="<?php echo iro_opt( 'favicon_link', '' ); ?>" />
+	<link rel="preload" href="/webstatic/fontawesome/css/all.min.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="https://aiccrop.com/webstatic/self-hosted/optmize-fonts.css?ver=24.1.2" as="style"
+		onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preload"
+		href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+SC:wght@100..900&display=swap"
+		as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="https://use.typekit.net/ytd1lqa.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'">
+
 	<meta http-equiv="x-dns-prefetch-control" content="on">
-	<?php if (is_home()) {
+
+	<?php if ( is_home() ) {
 		//预载资源
 		//id 一致，pjax 自动替换
 		global $core_lib_basepath; ?>
 		<link id="entry-content-css" rel="prefetch" as="style"
-			href="<?= $core_lib_basepath . '/css/theme/' . (iro_opt('entry_content_style') == 'sakurairo' ? 'sakura' : 'github') . '.css?ver=' . IRO_VERSION ?>" />
+			href="<?= $core_lib_basepath . '/css/theme/' . ( iro_opt( 'entry_content_style' ) == 'sakurairo' ? 'sakura' : 'github' ) . '.css?ver=' . IRO_VERSION ?>" />
 		<link rel="prefetch" as="script" href="<?= $core_lib_basepath . '/js/page.js?ver=' . IRO_VERSION ?>" />
-		<?php } ?>
-		<link rel="preload" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<?php } ?>
 	<?php wp_head(); ?>
-	<script type="text/javascript">if (!!window.ActiveXObject || "ActiveXObject" in window) {alert('本站不支持 IE 浏览器');}</script>
-	<?php if (iro_opt('google_analytics_id', '')): ?>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo iro_opt('google_analytics_id', ''); ?>"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments) }
-		gtag('js', new Date());
-		gtag('config', '<?php echo iro_opt('google_analytics_id', ''); ?>');
-	</script>
-	<?php endif; ?>
-	<?php echo iro_opt("site_header_insert"); ?>
+	<script
+		type="text/javascript">if (!!window.ActiveXObject || "ActiveXObject" in window) { alert('本站不支持 IE 浏览器'); }</script>
+	<?php echo iro_opt( "site_header_insert" ); ?>
 </head>
+
 <body <?php body_class(); ?>>
-	<?php if (iro_opt('preload_animation', 'true')): ?>
+	<?php if ( iro_opt( 'preload_animation', 'true' ) ) : ?>
 		<div id="preload">
 			<li data-id="3" class="active">
 				<div id="preloader_3"></div>
@@ -60,14 +53,15 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 	<header class="site-header no-select" role="banner">
 		<div class="site-top">
 			<div class="site-branding">
-				<?php if (iro_opt('iro_logo') && !iro_opt('mashiro_logo_option', false)) { ?>
+				<?php if ( iro_opt( 'iro_logo' ) && ! iro_opt( 'mashiro_logo_option', false ) ) { ?>
 					<div class="site-title">
-						<a href="<?php bloginfo('url'); ?>"><img src="<?php echo iro_opt('iro_logo'); ?>" alt="site-logo"></a>
+						<a href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo iro_opt( 'iro_logo' ); ?>"
+								alt="site-logo"></a>
 					</div>
 				<?php } else { ?>
 					<span class="site-title">
 						<span class="logolink moe-mashiro">
-							<a href="<?php bloginfo('url'); ?>">
+							<a href="<?php bloginfo( 'url' ); ?>">
 								<ruby>
 									<span class="sakuraso">
 										<?= $mashiro_logo['text_a'] ?? ""; ?>
@@ -90,11 +84,11 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 				<?php } ?>
 				<!-- logo end -->
 			</div><!-- .site-branding -->
-			<?php if (iro_opt('nav_menu_search') == '1') { ?>
+			<?php if ( iro_opt( 'nav_menu_search' ) == '1' ) { ?>
 				<div class="searchbox js-toggle-search"><i class="fa-solid fa-magnifying-glass"></i></div>
 			<?php } ?>
 			<div class="lower">
-				<?php if (iro_opt('nav_menu_display') == 'fold') { ?>
+				<?php if ( iro_opt( 'nav_menu_display' ) == 'fold' ) { ?>
 					<div id="show-nav" class="showNav">
 						<div class="line line1"></div>
 						<div class="line line2"></div>
@@ -102,7 +96,7 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 					</div>
 				<?php } ?>
 				<nav>
-					<?php wp_nav_menu(array('depth' => 2, 'theme_location' => 'primary', 'container' => false)); ?>
+					<?php wp_nav_menu( array( 'depth' => 2, 'theme_location' => 'primary', 'container' => false ) ); ?>
 				</nav><!-- #site-navigation -->
 			</div>
 		</div>
@@ -114,22 +108,22 @@ $vision_resource_basepath = iro_opt('vision_resource_basepath');
 	</div><!-- m-nav-bar -->
 	<section id="main-container">
 		<?php
-		if (iro_opt('cover_switch')) {
-			$filter = iro_opt('random_graphs_filter');
+		if ( iro_opt( 'cover_switch' ) ) {
+			$filter = iro_opt( 'random_graphs_filter' );
 			?>
 			<div class="headertop <?php echo $filter; ?>">
-				<?php get_template_part('layouts/imgbox'); ?>
+				<?php get_template_part( 'layouts/imgbox' ); ?>
 			</div>
 		<?php } ?>
 		<div id="page" class="site wrapper">
 			<?php
-			$use_as_thumb = get_post_meta(get_the_ID(), 'use_as_thumb', true); //'true','only',(default)
-			if ($use_as_thumb != 'only') {
-				$cover_type = get_post_meta(get_the_ID(), 'cover_type', true);
-				if ($cover_type == 'hls') {
-					the_video_headPattern(true);
-				} elseif ($cover_type == 'normal') {
-					the_video_headPattern(false);
+			$use_as_thumb = get_post_meta( get_the_ID(), 'use_as_thumb', true ); //'true','only',(default)
+			if ( $use_as_thumb != 'only' ) {
+				$cover_type = get_post_meta( get_the_ID(), 'cover_type', true );
+				if ( $cover_type == 'hls' ) {
+					the_video_headPattern( true );
+				} elseif ( $cover_type == 'normal' ) {
+					the_video_headPattern( false );
 				} else {
 					the_headPattern();
 				}

@@ -16,7 +16,9 @@
 get_header();
 ?>
 
-
+<style>
+#mobileTocbot{display:none}
+</style>
 
 <?php if (iro_opt('bulletin_board') == '1') {
 	$text = iro_opt('bulletin_text');
@@ -54,8 +56,7 @@ if (iro_opt('exhibition_area') == '1') {
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
-			<?php
-			endif;
+			<?php endif;
 			/* Start the Loop */
 			if (iro_opt('post_list_style') == 'akinastyle') {
 				while (have_posts()) : the_post();

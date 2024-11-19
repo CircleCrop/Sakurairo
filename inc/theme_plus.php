@@ -475,49 +475,6 @@ add_filter( 'excerpt_length', 'changes_post_excerpt_length', 999 );
 /*
  * SEO优化
  */
-// 外部链接自动加nofollow
-add_filter( 'the_content', 'siren_auto_link_nofollow');
-function siren_auto_link_nofollow( $content ) {
-  $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>";
-  if(preg_match_all("/$regexp/siU", $content, $matches, PREG_SET_ORDER)) {
-    if( !empty($matches) ) {
-      $srcUrl = get_option('siteurl');
-      foreach($matches as $result){
-        $tag = $result[0];
-        $tag2 = $result[0];
-        $url = $result[0];
-        $noFollow = '';
-        $pattern = '/target\s*=\s*"\s*_blank\s*"/';
-        preg_match($pattern, $tag2, $match, PREG_OFFSET_CAPTURE);
-        if( count($match) < 1 )
-            $noFollow .= ' target="_blank" ';
-        $pattern = '/rel\s*=\s*"\s*[n|d]ofollow\s*"/';
-        preg_match($pattern, $tag2, $match, PREG_OFFSET_CAPTURE);
-        if( count($match) < 1 )
-            $noFollow .= ' rel="nofollow" ';
-        $pos = strpos($url,$srcUrl);
-        if ($pos === false) {
-            $tag = rtrim ($tag,'>');
-            $tag .= $noFollow.'>';
-            $content = str_replace($tag2,$tag,$content);
-        }
-      }
-    }
-  }
-   
-  $content = str_replace(']]>', ']]>', $content);
-  return $content;
-}
-
-// 图片自动加标题
-add_filter('the_content', 'siren_auto_images_alt');
-function siren_auto_images_alt($content) {
-  global $post;
-  $pattern ="/<a(.*?)href=('|\")(.*?).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>/i";
-  $replacement = '<a$1href=$2$3.$4$5 alt="'.$post->post_title.'" title="'.$post->post_title.'"$6>';
-  $content = preg_replace($pattern, $replacement, $content);
-  return $content;
-}
 
 // 分类页面全部添加斜杠，利于SEO
 function siren_nice_trailingslashit($string, $type_of_url) {

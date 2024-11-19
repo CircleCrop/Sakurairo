@@ -11,14 +11,14 @@ if (iro_opt('article_nextpre') == '1') {
 		$classify_display_id = iro_opt('classify_display');
 		$previous_style = get_next_post(false, $classify_display_id) ? 'half' : 'full';
 		$next_style = get_previous_post(false, $classify_display_id) ? 'half' : 'full';
-		$prev_link_html = '<div class="background" style="background-image:url(' . get_prev_thumbnail_url() . ');"></div>' .
+		$prev_link_html = '<div class="background" style="background-image:url(' . get_prev_thumbnail_url() . ');background-position:center;"></div>' .
 			'<span class="label">' .
 			__("Previous Post", 'sakurairo') .
 			'</span>' .
 			'<div class="info">' .
 			'<h3>%title</h3><hr>' .
 			'</div>';
-		$next_link_html = '<div class="background" style="background-image:url(' . get_next_thumbnail_url() . ');"></div>' .
+		$next_link_html = '<div class="background" style="background-image:url(' . get_next_thumbnail_url() . ');background-position:center;"></div>' .
 			'<span class="label">' .
 			__("Next Post", 'sakurairo') .
 			'</span>' .

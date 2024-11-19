@@ -2,18 +2,9 @@
 
 /*
 Theme Name: Sakurairo
-Theme URI: https://github.com/CircleCrop/Sakurairo
-Author: Fuukei
-Author URI: https://fuukei.org/
-Description: Based on Theme Sakura
-Version: 24.1.8
-Tested up to: 6.4
-Requires at least: 5.8
-Requires PHP: 7.2
+Version: 24.8.5
 License: GNU v2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:
-Tags:
 */
 
 .headertop {
@@ -790,7 +781,7 @@ input[type="week"] {
 
 .site-header.yya {
   background: rgba(255, 255, 255, 0.7);
-  border-bottom: 1.5px solid #ffffff;
+  /*border-bottom: 1.5px solid #ffffff;*/
   transition: all 0.8s ease;
   width: 100%;
   left: 0;
@@ -2572,7 +2563,7 @@ h1.main-title {
   font-family: "Noto Serif SC";
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
   transition: all 0.8s ease !important;
 }
 
@@ -4530,30 +4521,6 @@ td.hljs-ln-numbers {
   border-radius: var(--style_menu_radius, 5px);
 }
 
-.aplayer {
-  background: rgba(255, 255, 255, 0.3);
-  font-family: "Noto Serif CJK SC", "Noto Serif CJK", "Source Han Serif SC",
-    "Source Han Serif", source-han-serif-sc, "PT Serif", "SongTi SC",
-    "MicroSoft Yahei", Georgia, serif;
-  box-shadow: 0 0 0 1px #eee;
-  border-radius: 3px;
-  margin: 15px 0;
-}
-
-.aplayer
-  .aplayer-info
-  .aplayer-controller
-  .aplayer-bar-wrap
-  .aplayer-bar
-  .aplayer-played
-  .aplayer-thumb {
-  height: 12px;
-  width: 12px;
-  right: 3px;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.18);
-  transition: all 0.35s;
-}
-
 .coverVideo-btn {
   all: initial;
   display: inline-block;
@@ -5362,7 +5329,7 @@ a:focus {
 .ins-section .ins-search-item:hover header,
 .sorry li a:hover,
 .art .art-content #archives a:hover {
-  color: var(--theme-skin-matching, #f9d938);
+  text-decoration:underline;
 }
 
 .comment h4 a:hover {
@@ -9547,7 +9514,7 @@ body.theme-dark .cbp_tmtimeline::before {
   margin: 1.5px;
   background: #404040;
   font-size: 16px;
-  color: var(--theme-skin-matching, #f9d938);
+	color: white;
   word-break: break-word;
   text-shadow: none;
   border-radius: 5px;
@@ -9560,18 +9527,13 @@ body.theme-dark .cbp_tmtimeline::before {
 }
 
 img[class*="wp-image-"] {
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.36);
-  border-radius: 8px;
+  border-radius: 12px;
   transition: transform 0.4s ease;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 .wp-block-img figcaption,
 .size-square700-thumb img {
   border-radius: 8px;
-}
-
-img[class*="wp-image-"]:hover {
-  transform: scale(1.01);
 }
 
 .no-effect img {

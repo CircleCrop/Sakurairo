@@ -131,7 +131,7 @@ if( !empty($_POST['register_reg']) ) {
 	width: 100%;
 	height: 100%;
 	font-size: 13px;
-	font-family: 'Microsoft Yahei', serif;
+	font-family: 'Noto Sans SC', serif;
 	color: #888;
 	line-height: 46px;
 	text-align: center;
