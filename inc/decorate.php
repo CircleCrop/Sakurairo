@@ -323,53 +323,46 @@ html {
 
 /*字体*/
 .serif{
-font-family:<?=iro_opt('global_default_font'); ?> !important ;
-font-size: <?=iro_opt('global_font_size'); ?>px;
+font-family:<?= iro_opt('global_default_font'); ?> !important ;
+font-size: <?= iro_opt('global_font_size'); ?>px;
 }
 body{
-font-family:<?=iro_opt('global_font_2'); ?> !important;
-font-size: <?=iro_opt('global_font_size'); ?>px;
+font-family:<?= iro_opt('global_font_2'); ?> !important;
+font-size: <?= iro_opt('global_font_size'); ?>px;
 }
 .site-top ul li a,.header-user-name,.header-user-menu a {
-font-family:<?=iro_opt('nav_menu_font'); ?> !important;
+font-family:<?= iro_opt('nav_menu_font'); ?> !important;
 }
-<?php if (iro_opt('mashiro_logo')) {
-$mashiro_logo = iro_opt('mashiro_logo');
-?>
-.site-title a{
-font-family: '<?php echo $mashiro_logo['font_name']; ?>';
-}
-<?php } ?>
 .site-info,.site-info a{
-font-family:<?=iro_opt('footer_text_font'); ?> !important;
+font-family:<?= iro_opt('footer_text_font'); ?> !important;
 }
 .skin-menu p{
-font-family:<?=iro_opt('style_menu_font'); ?> !important;
+font-family:<?= iro_opt('style_menu_font'); ?> !important;
 }
 h1.main-title,h1.fes-title{
-font-family:<?=iro_opt('area_title_font'); ?>;
+font-family:<?= iro_opt('area_title_font'); ?>;
 }
 .header-info p, .header-shuo p{
-font-family:<?=iro_opt('signature_font'); ?> !important;
-font-size: <?=iro_opt('signature_font_size'); ?>px;
+font-family:<?= iro_opt('signature_font'); ?> !important;
+font-size: <?= iro_opt('signature_font_size'); ?>px;
 }
 .cbp_tmtimeline > li .cbp_tmlabel {
-font-family:<?=iro_opt('shuoshuo_font'); ?> !important;
+font-family:<?= iro_opt('shuoshuo_font'); ?> !important;
 }
 .post-list-thumb .post-title h3{
-font-size: <?=iro_opt('post_title_font_size'); ?>px !important;
+font-size: <?= iro_opt('post_title_font_size'); ?>px !important;
 }
 .post-meta, .post-meta a{
-font-size: <?=iro_opt('post_date_font_size'); ?>px !important;
+font-size: <?= iro_opt('post_date_font_size'); ?>px !important;
 }
 .pattern-center h1.cat-title,.pattern-center h1.entry-title {
-font-size: <?=iro_opt('page_temp_title_font_size'); ?>px ;
+font-size: <?= iro_opt('page_temp_title_font_size'); ?>px ;
 }
 .pattern-center-sakura h1.cat-title,.pattern-center-sakura h1.entry-title {
-font-size: <?=iro_opt('page_temp_title_font_size'); ?>px !important;
+font-size: <?= iro_opt('page_temp_title_font_size'); ?>px !important;
 }
 .single-center .single-header h1.entry-title {
-font-size: <?=iro_opt('article_title_font_size'); ?>px ;
+font-size: <?= iro_opt('article_title_font_size'); ?>px ;
 }
 /*背景类*/
 .comment-respond textarea {
